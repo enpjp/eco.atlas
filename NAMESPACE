@@ -2,4 +2,6 @@
 
 export("%>%")
 export(Clean.Dates)
+export(GBNG.to.Lat.Long)
+export(bb_to_polygon)
 importFrom(magrittr,"%>%")
