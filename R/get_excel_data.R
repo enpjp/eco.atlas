@@ -118,7 +118,7 @@ get_excel_data <- function(data_raw_directory="data-source", columns_list) {
           # Now test if the data OK
           save.directory <- "data-NA"
 
-          if(!my.file.type == "unknown") {save.directory <- "data-clean"}
+          if(!my.file.type == "unknown") {save.directory <- "data-sl"}
 
           # We will now save each file in data-clean or data-NA
           temp.nice.name <- paste(nice.file.name,nice.sheet.name, sep = "." )
