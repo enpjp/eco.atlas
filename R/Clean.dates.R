@@ -8,12 +8,12 @@
 #'
 #' "YYMMDD", "week", "YYYY", "DD", "MM", "MMDD", "DOY"
 #'
-#' @export Clean.Dates
+#' @export Clean.dates
 #'
 #'
 #'
 #'
-Clean.Dates <- function(x) {
+Clean.dates <- function(x) {
   f.data <- as.data.frame(x)
   # Add a column name
   colnames(f.data) <- c("Date") %>% as.character()
