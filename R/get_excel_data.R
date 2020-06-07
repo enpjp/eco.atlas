@@ -32,7 +32,7 @@ get_excel_data <- function(data_raw_directory="data-source", columns_list) {
 
   temp.list.path <- temp.list
 
-  # Mollusc_data <- read_excel("inst/dev/utils.template.network.inst.dev/data-raw/Mollusc data.xlsx")
+
 
 
 
@@ -55,7 +55,7 @@ get_excel_data <- function(data_raw_directory="data-source", columns_list) {
           as.data.frame()
 
         # Try and read clean dates
-        my.clean.dates <- utils.template.network::Clean.dates(
+        my.clean.dates <- eco.atlas::Clean.dates(
           temp.my.data.excel$Date) %>%
           as.data.frame()
         # Which rows are clean
