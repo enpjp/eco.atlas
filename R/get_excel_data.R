@@ -16,6 +16,9 @@
 #'
 #'
 get_excel_data <- function(data_raw_directory="data-source", columns_list) {
+ # Create the directories
+   dir.create("data-sl", showWarnings = FALSE)
+  dir.create("data-NA", showWarnings = FALSE)
   my.columns <- columns_list
   standard.col.names <- columns_list[[1]]
   temp.path <- data_raw_directory
