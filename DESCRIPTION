@@ -20,4 +20,5 @@ Imports:
     rnrfa,
     ggmap,
     fs,
-    readxl
+    readxl,
+    magick
