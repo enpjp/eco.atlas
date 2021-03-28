@@ -23,4 +23,5 @@ Imports:
     readxl,
     magick,
     gridExtra,
-    grid
+    grid,
+    stringr
