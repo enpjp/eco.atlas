@@ -17,10 +17,34 @@ Clean.dates <- function(x) {
   f.data <- as.data.frame(x)
   # Add a column name
   colnames(f.data) <- c("Date") %>% as.character()
-  # Rather than use subfunctions we use a series of custom regex to check for basic date syntax.
-  # Once the rows containing valid dataes are found they are converted to dates
-  # The resutling output is the same length as the input vector so the user has a choice
-  # on how to handle the invalid date rows.
+  # Rather than use subfunctions we use a series of custom regex to check for
+  # basic date syntax. Once the rows containing valid dataes are found they are
+  # converted to dates The resulting output is the same length as the input
+  # vector so the user has a choice on how to handle the invalid date rows.
+
+  # Deal with date ranges of the form "August 2012 to September 2012". Assume all
+  # dates of this type start on the first of the month.
+
+  # First find which rows have "to"
+  f.data$isadate <- grepl(" to ",f.data$Date )
+  which.rows <- which(f.data$isadate)
+
+  # we now need to pull out the month and year.
+  date.words <- stringr::str_extract_all(f.data[which.rows,"Date"],
+                                         stringr::boundary("word")) %>% unlist()
+
+  my.month <- date.words[1] # get the month
+  my.year <- date.words[2] # get the year
+
+  my_months_number <- match(my.month,month.name) # as a number
+
+  # Make into a date
+  my.new.date <- paste(my.year,my_months_number,"01", sep = "-" )
+
+  # now paste into f.data
+  f.data[which.rows,"Date"] <- my.new.date
+
+  # all should now be good from here.
 
   # Test for dates dd-mm-yyyy
   f.data$isadate <- grepl("\\d{2}-\\d{2}-\\d{4}",f.data$Date )
