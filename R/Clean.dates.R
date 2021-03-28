@@ -1,7 +1,7 @@
 #' Clean.Dates
 #'
 #' Converts dates in inconsistent formats into a consistent format.
-#' As written it only uses base functions,
+#' It now uses string functions
 #' @param x A vector of dates
 #'
 #' @return A multicolumn vector of the same length as x with the following values:
@@ -34,9 +34,12 @@ Clean.dates <- function(x) {
                                          stringr::boundary("word")) %>% unlist()
 
   my.month <- date.words[1] # get the month
+
   my.year <- date.words[2] # get the year
 
-  my_months_number <- match(my.month,month.name) # as a number
+  my_months_index <- match(my.month,month.name) # as a number
+  # str_pad(string, 2, side = "left", pad = "0")
+  my_months_number <- stringr::str_pad(my_months_index, 2, side = "left", pad = "0")
 
   # Make into a date
   my.new.date <- paste(my.year,my_months_number,"01", sep = "-" )
@@ -89,16 +92,16 @@ Clean.dates <- function(x) {
     strftime(as.POSIXlt(as.Date(as.numeric(as.character(f.data[which.rows,"Date"])), origin = "1899-12-30",format = "%Y-%m-%d" )),
              format="%Y-%m-%d")
 
-  # Deal with date ranges of the form "August 2012 to September 2012". Assume all
-  # dates of this type start on the first of the month.
-
-  # First find which rows have "to"
-  f.data$isadate <- grepl(" to ",f.data$Date )
-  which.rows <- which(f.data$isadate)
-
-  # we now need to pull out the month and year.
-  date.words <- stringr::str_extract_all(f.data[which.rows,"Date"], stringr::boundary("word"))
-
+  # # Deal with date ranges of the form "August 2012 to September 2012". Assume all
+  # # dates of this type start on the first of the month.
+  #
+  # # First find which rows have "to"
+  # f.data$isadate <- grepl(" to ",f.data$Date )
+  # which.rows <- which(f.data$isadate)
+  #
+  # # we now need to pull out the month and year.
+  # date.words <- stringr::str_extract_all(f.data[which.rows,"Date"], stringr::boundary("word"))
+  #
 
 
   # Now try to transform all the dates and break out the year, month and week numbers
