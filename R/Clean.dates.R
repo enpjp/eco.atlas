@@ -25,8 +25,10 @@ Clean.dates <- function(x) {
   # Deal with date ranges of the form "August 2012 to September 2012". Assume all
   # dates of this type start on the first of the month.
 
-  # First find which rows have "to"
-  f.data$isadate <- grepl(" to ",f.data$Date )
+  # First find which rows have "to".
+  # This works better if we look for spaces in front of the year.
+  f.data$isadate <- grepl(" \\d{4}",f.data$Date )
+ # f.data$isadate <- grepl(" to ",f.data$Date )
   which.rows <- which(f.data$isadate)
 
   # we now need to pull out the month and year.
