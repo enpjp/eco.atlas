@@ -16,5 +16,5 @@ A multicolumn vector of the same length as x with the following values:
 }
 \description{
 Converts dates in inconsistent formats into a consistent format.
-As written it only uses base functions,
+It now uses string functions
 }
