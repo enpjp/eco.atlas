@@ -25,10 +25,40 @@ Clean.dates <- function(x) {
   # Deal with date ranges of the form "August 2012 to September 2012". Assume all
   # dates of this type start on the first of the month.
 
-  # First find which rows have "to".
+
+  # Another problem are dates comprising a single year
+  f.data$isadate <- grepl("^\\d{4}$",f.data$Date )
+  which.rows <- which(f.data$isadate)
+
+  # we now need to pull out the month and year.
+  my.year <- f.data[which.rows,"Date"]
+
+  # Make into a date
+  my.new.date <- paste(my.year,"06","01", sep = "-" )
+
+  # now paste into f.data
+  f.data[which.rows,"Date"] <- my.new.date
+
+  # Another problem are dates comprising a range year
+
+  f.data$isadate <- grepl("^\\d{4} to \\d{4}",f.data$Date )
+  which.rows <- which(f.data$isadate)
+
+  # we now need to pull out the month and year.
+  date.words <- stringr::str_extract_all(f.data[which.rows,"Date"],
+                                         stringr::boundary("word")) %>% unlist()
+  my.year <- date.words[1] # get the year
+
+  # Make into a date
+  my.new.date <- paste(my.year,"06","01", sep = "-" )
+
+  # now paste into f.data
+  f.data[which.rows,"Date"] <- my.new.date
+
+  # Now find which rows have "to".
   # This works better if we look for spaces in front of the year.
   f.data$isadate <- grepl(" \\d{4}",f.data$Date )
- # f.data$isadate <- grepl(" to ",f.data$Date )
+  # f.data$isadate <- grepl(" to ",f.data$Date )
   which.rows <- which(f.data$isadate)
 
   # we now need to pull out the month and year.
@@ -48,6 +78,7 @@ Clean.dates <- function(x) {
 
   # now paste into f.data
   f.data[which.rows,"Date"] <- my.new.date
+
 
   # all should now be good from here.
 
