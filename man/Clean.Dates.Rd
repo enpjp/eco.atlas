@@ -18,3 +18,8 @@ A multicolumn vector of the same length as x with the following values:
 Converts dates in inconsistent formats into a consistent format.
 It now uses string functions.
 }
+\examples{
+my.cleaned.dates <- Clean.dates(c("1916-01-01", "2000 to 2010",
+"July 1996 to August 1997"  ))
+
+}
