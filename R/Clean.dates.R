@@ -10,8 +10,9 @@
 #'
 #' @export Clean.dates
 #'
-#'
-#'
+#' @examples
+#'my.cleaned.dates <- Clean.dates(c("1916-01-01", "2000 to 2010",
+#' "July 1996 to August 1997"  ))
 #'
 Clean.dates <- function(x) {
   f.data <- as.data.frame(x)
