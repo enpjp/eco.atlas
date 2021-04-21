@@ -17,8 +17,10 @@
 #'
 get_excel_data <- function(data_raw_directory="data-source", columns_list) {
  # Create the directories
-   dir.create("data-sl", showWarnings = FALSE)
-  dir.create("data-NA", showWarnings = FALSE)
+  # We need to make sure that the top level project directory is used.
+  absolute.path <- rprojroot::find_rstudio_root_file()
+   dir.create(fs::path(absolute.path, "data-sl"), showWarnings = FALSE)
+  dir.create(fs::path(absolute.path,"data-NA"), showWarnings = FALSE)
   my.columns <- columns_list
   standard.col.names <- columns_list[[1]]
   temp.path <- data_raw_directory
@@ -82,7 +84,7 @@ get_excel_data <- function(data_raw_directory="data-source", columns_list) {
         test.temp.my.file <- temp.my.data.excel
 
         # Now test if the data OK
-        save.directory <- "data-NA"
+        save.directory <- fs::path(absolute.path, "data-NA")
 
         # Length of target list
         length.target <- length(my.columns[[1]])
@@ -107,7 +109,8 @@ get_excel_data <- function(data_raw_directory="data-source", columns_list) {
             test.temp.my.file$source <- paste(test.temp.my.file$source,
                                               my.file.type, sep = "," )
             # And set the source directory to data-sl
-            save.directory <- "data-sl"
+
+            save.directory <- fs::path(absolute.path, "data-sl")
           } # end add source index
           ############
 

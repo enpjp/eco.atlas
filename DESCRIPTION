@@ -24,4 +24,5 @@ Imports:
     magick,
     gridExtra,
     grid,
-    stringr
+    stringr,
+    rprojroot
