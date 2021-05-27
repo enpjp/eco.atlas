@@ -25,4 +25,6 @@ Imports:
     gridExtra,
     grid,
     stringr,
-    rprojroot
+    rprojroot,
+    bookdown,
+    rstudioapi
