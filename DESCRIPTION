@@ -27,4 +27,5 @@ Imports:
     stringr,
     rprojroot,
     bookdown,
-    rstudioapi
+    rstudioapi,
+    tools

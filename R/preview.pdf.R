@@ -20,7 +20,11 @@ directory.base.name <- basename(current.pane)
 current.chapter.Rmd <- fs::path(directory.base.name, ext = "Rmd")
 output.pdf <- fs::path(directory.base.name, ext = "pdf")
 
+tools::compactPDF()
+
 setwd(current.pane)
 bookdown::preview_chapter(current.chapter.Rmd,output_file = output.pdf)
+# Now compact the pdf
+tools::compactPDF(output.pdf,qpdf = "qpdf", gs_cmd = "gs", gs_quality = "ebook")
 setwd(rprojroot::find_rstudio_root_file())
 }
