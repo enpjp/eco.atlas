@@ -20,7 +20,6 @@ directory.base.name <- basename(current.pane)
 current.chapter.Rmd <- fs::path(directory.base.name, ext = "Rmd")
 output.pdf <- fs::path(directory.base.name, ext = "pdf")
 
-tools::compactPDF()
 
 setwd(current.pane)
 bookdown::preview_chapter(current.chapter.Rmd,output_file = output.pdf)
