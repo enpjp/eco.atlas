@@ -1,7 +1,8 @@
 
 #' Preview.pdf
 #'
-#' Generates a preview of the currently active bookdown chapter
+#' Generates a preview of the currently active bookdown chapter and compresses
+#' the PDF file.
 #'
 #'
 #'
