@@ -29,4 +29,6 @@ Imports:
     bookdown,
     rstudioapi,
     tools,
-    usethis
+    usethis,
+    readr,
+    whisker

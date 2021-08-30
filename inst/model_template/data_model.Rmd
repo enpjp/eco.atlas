@@ -49,7 +49,7 @@ datumList <- list(
   "recorder.name" = "Recorder Name",
   "record.notes" = "Record Notes",
   "determiner" = "Determiner Name",
-  "order" = "{{{Order}}}" ,
+  "order" = "{{{order}}}" ,
   "family" = "Family",
   "sub.family" = "Sub-Family",
   "genus" = "Genus",

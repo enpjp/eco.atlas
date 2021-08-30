@@ -22,7 +22,7 @@ new.record <- function(index.reference, Order = "Lepidoptera") {
 
   my.working.directory <- fs::path(getwd())
 
-  dir.create(index.reference)
+ # dir.create(index.reference)
 
   # Now create an images directory
   images.dir <- fs::path(my.working.directory,index.reference, "images")
