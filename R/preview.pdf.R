@@ -58,6 +58,6 @@ if(length(jpeg.files.to.change) > 0) {
 output.pdf <- fs::path(directory.base.name, ext = "pdf")
 bookdown::preview_chapter(current.chapter.Rmd,output_file = output.pdf)
 # Now compact the pdf
-tools::compactPDF(output.pdf,qpdf = "qpdf", gs_cmd = "gs", gs_quality = "ebook")
+tools::compactPDF(output.pdf,qpdf = "qpdf", gs_cmd = "gs", gs_quality = "printer")
 setwd(rprojroot::find_rstudio_root_file())
 }
