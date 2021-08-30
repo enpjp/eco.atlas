@@ -4,12 +4,33 @@
 \alias{new.record}
 \title{new.record}
 \usage{
-new.record(index.reference, Order = "Lepidoptera")
+new.record(
+  index.reference,
+  record.date = "Date",
+  place.name = "Place Name",
+  grid.ref = "Grid Reference",
+  recorder.name = "Recorder Name",
+  record.notes = "Record Notes",
+  determiner = "Determiner Name",
+  Order = "Lepidoptera"
+)
 }
 \arguments{
 \item{index.reference}{A unique record identifier.}
 
-\item{Order}{Record order.}
+\item{record.date}{ISO Date.}
+
+\item{place.name}{Place name.}
+
+\item{grid.ref}{Grid ref.}
+
+\item{recorder.name}{Recorder Name.}
+
+\item{record.notes}{Record notes.}
+
+\item{determiner}{The determiner.}
+
+\item{Order}{Taxon order.}
 }
 \value{
 Nothing returned

@@ -4,16 +4,35 @@
 #'
 #'
 #'@param index.reference A unique record identifier.
-#'@param Order Record order.
-#'
+#'@param record.date ISO Date.
+#'@param place.name Place name.
+#'@param grid.ref Grid ref.
+#'@param recorder.name Recorder Name.
+#'@param record.notes Record notes.
+#'@param determiner The determiner.
+#'@param Order Taxon order.
 #'
 #' @return Nothing returned
 #' @export new.record
 #'
-new.record <- function(index.reference, Order = "Lepidoptera") {
+new.record <- function(index.reference,
+                       record.date = "Date",
+                       place.name = "Place Name",
+                       grid.ref = "Grid Reference",
+                       recorder.name = "Recorder Name",
+                       record.notes = "Record Notes",
+                       determiner = "Determiner Name",
+                       Order = "Lepidoptera"
+                       ) {
 
   my.lists <- list(
     index.reference = index.reference,
+    record.date = "Date",
+    place.name = "Place Name",
+    grid.ref = "Grid Reference",
+    recorder.name = "Recorder Name",
+    record.notes = "Record Notes",
+    determiner = "Determiner Name",
     order = Order
 
     )

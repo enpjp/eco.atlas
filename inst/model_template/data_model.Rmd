@@ -43,12 +43,12 @@ datumTripleAll<- datumTriple
 
 ```{r include=TRUE, echo=FALSE }
 datumList <- list(
-  "record.date" = "Date",
-  "place.name" = "Place Name",
-  "grid.ref" = "Grid Reference",
-  "recorder.name" = "Recorder Name",
-  "record.notes" = "Record Notes",
-  "determiner" = "Determiner Name",
+  "record.date" = "{{{record.date}}}",
+  "place.name" = "{{{place.name}}}",
+  "grid.ref" = "{{{grid.ref}}}",
+  "recorder.name" = "{{{recorder.name}}}",
+  "record.notes" = "{{{record.notes}}}",
+  "determiner" = "{{{determiner}}}",
   "order" = "{{{order}}}" ,
   "family" = "Family",
   "sub.family" = "Sub-Family",
