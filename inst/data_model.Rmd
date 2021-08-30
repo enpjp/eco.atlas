@@ -1,0 +1,224 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+<!-- The YAML allows compiling just this page. 
+First set the recordID -->
+
+```{r include=TRUE, echo=FALSE, message=FALSE}
+require(plyr)
+require(tidyverse)
+
+# Set the record ID which must be unique. We do it this way so we only enter it
+recordID <- "EntityAttributes"
+
+```
+
+
+
+```{r  include=TRUE, echo=FALSE}
+# Careful with named chunks when child documents are in play.
+
+# First create the placeholders for datumTriples
+
+
+datumTriple <- data.frame(datumEntity=character(),
+                              datumAttribute =character(),
+                              datumValue = character(), stringsAsFactors = FALSE)
+
+# Assign the recordID as the name for collection
+datumTripleTemp <- datumTriple
+datumTripleAll<- datumTriple
+#assign(recordID, datumTriple ) # Use this to save the data as we go.
+
+
+```
+
+
+
+<!-- Now start creating datum triples of specimen details. 
+-->
+
+```{r include=TRUE, echo=FALSE }
+datumList <- list(
+  "record.date" = "Date",
+  "place.name" = "Place Name",
+  "grid.ref" = "Grid Reference",
+  "recorder.name" = "Recorder Name",
+  "record.notes" = "Record Notes",
+  "determiner" = "Determiner Name",
+  "order" = "Order" ,
+  "family" = "Family",
+  "sub.family" = "Sub-Family",
+  "genus" = "Genus",
+  "taxon" = "Taxon",
+  "log.number" = "Classification Log Number",
+  "Bradley"= "Bradley Fletcher Number",
+  "common.name" = "Common Name",
+  "gender" = c("Male, Female")
+  )
+
+  dataLabelTemp <- data.frame(
+                              datumAttribute = names(datumList),
+                              datumValue = unlist(datumList))
+  
+  labelTaxon <- dataLabelTemp$datumValue[
+    which( dataLabelTemp$datumAttribute == 'taxon')]
+  
+  labelcommon.name <- dataLabelTemp$datumValue[
+    which( dataLabelTemp$datumAttribute == 'common.name')]
+  
+  label.contents <- paste(names(datumList), unlist(datumList), sep = ": ")
+  
+  # To create a set of datumTriples we assign values and use rbind to stack them
+# into a long format.
+
+  datumTriple <- data.frame(datumEntity= recordID ,
+                              datumAttribute = names(datumList),
+                              datumValue = unlist(datumList))
+# Clear row names as they can get in the way since they should be unique
+row.names(datumTriple) <- NULL
+
+# Add datumTriple to the running tally of datumTriples datumTripleAll
+datumTripleAll <- rbind(datumTripleAll,datumTriple )
+  
+  sectionTitle <- paste(recordID, labelTaxon, labelcommon.name, sep= " "  )
+
+```
+
+
+<!-- This starts with a section as multiple child documents are assembled 
+build the name from the data -->
+## Specimen `r sectionTitle` {-}
+
+**Label details**: 
+`r knitr::combine_words( label.contents)`.
+
+
+```{r  include=TRUE, echo=FALSE}
+# Careful with named chunks when child documents are in play.
+
+# Print out a table 
+#knitr::kable(datumTriple, caption = "Record attributes used in these reports")
+
+# Repeat for any other observations
+
+```
+
+<!-- Automatically add images with height 1000px -->
+```{r  eval=TRUE,  include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap='Specimen images'  }
+# Set include=TRUE to use this block
+# The fig.show='hold' is needed to wrap images.
+# Absolute path needed as a workaround to make this work with child files
+absolutePath <- getwd()
+full.path <- fs::path(absolutePath,"images")
+fs::dir_create(full.path)
+
+# Images have been standardised to a height of 1000px and 72dpi. All images in
+# the top level directory are included automatically.
+
+set.dpi <- 700
+list.images <- fs::dir_ls( path = full.path, 
+                           type="file", 
+                           glob = "*.jpg|*.png") # only these image types
+
+# knitr::include_graphics works with lists.
+if( length(list.images) > 0) { 
+  knitr::include_graphics(list.images, dpi = set.dpi )
+      
+  }# Check we have some images to include.
+
+
+```
+
+
+
+<!-- Now add a list of things to measure -->
+```{r  include=TRUE, echo=FALSE }
+
+datumList <- list(
+  "FW.length" = "Forewing length mm",
+  "FW.width" = "Forewing width mm",
+  "EYE.d" = "Eye diameter mm", 
+  "Ocelli" = c("Present. Absent"),
+  "Ocelli.position" = c("Anterior, Posterior"),
+  "Ocelli.angle" = "Clockwise angle from antennae",
+  "Ocelli.placement" = c("Proximal, Distal"),
+  "Labial.palps" = c("Upright, Forward, Decending"),
+  "Frons" = c("Rough, Smooth"),
+  "Vertex" = c("Rough, Smooth"),
+  "EYE.texture" = c("Hairy, Hairless"),
+  "Chaetosemata" = c("Present, Absent")
+)
+
+```
+
+
+
+```{r  include=TRUE, echo=FALSE}
+# Careful with named chunks when child documents are in play.
+
+# To create a set of datumTriples we assign values and use rbind to stack them
+# into a long format.
+
+  datumTriple <- data.frame(datumEntity= recordID ,
+                              datumAttribute = names(datumList),
+                              datumValue = unlist(datumList))
+# Clear row names as they can get in the way since they should be unique
+row.names(datumTriple) <- NULL
+
+# Add datumTriple to the running tally of datumTriples datumTripleAll
+datumTripleAll <- rbind(datumTripleAll,datumTriple )
+
+observation.contents <- paste(names(datumList), unlist(datumList), sep = ": ")
+
+
+temp.data <- tidyr::pivot_wider(datumTripleAll, id_cols = datumEntity, 
+                                   names_from = datumAttribute, 
+                                   values_from = datumValue,
+                                    values_fn = list)
+
+# Print out a table 
+#knitr::kable(datumTriple, caption = "Specimen observations")
+
+# Repeat for any other observations
+
+```
+
+**Observations:** `r knitr::combine_words( observation.contents)`.
+
+**Dissection:** 
+
+
+<!-- Automatically add dissection images with height 1000px -->
+```{r eval=TRUE, include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap= 'Temporary slide in alcohol gel.'}
+# Set eval - TRUE to use.
+dissection.path <- fs::path(absolutePath,"images","dissection")
+fs::dir_create(dissection.path)
+
+
+set.dpi <- 700
+list.dissection.images <- fs::dir_ls( path = dissection.path, 
+                           type="file", 
+                           glob = "*.jpg|*.png") # only these image types
+
+# knitr::include_graphics works with lists.
+if( length(list.dissection.images) > 0) { 
+  knitr::include_graphics(list.dissection.images, dpi = set.dpi )
+      
+  }# Check we have some images to include.
+
+```
+
+
+<!-- Now save the file -->
+```{r  include=TRUE, echo=FALSE}
+# Finally save the rds need to use absolute path to make this robust.
+datumSavePath <- fs::path(absolutePath,recordID, ext = "rds")
+
+saveRDS(datumTripleAll, datumSavePath)
+```
+
+
