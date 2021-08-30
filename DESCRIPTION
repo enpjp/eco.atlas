@@ -28,4 +28,5 @@ Imports:
     rprojroot,
     bookdown,
     rstudioapi,
-    tools
+    tools,
+    usethis

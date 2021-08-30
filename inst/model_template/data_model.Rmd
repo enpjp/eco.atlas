@@ -8,11 +8,11 @@ output:
 First set the recordID -->
 
 ```{r include=TRUE, echo=FALSE, message=FALSE}
-require(plyr)
-require(tidyverse)
+library(plyr)
+library(tidyverse)
 
 # Set the record ID which must be unique. We do it this way so we only enter it
-recordID <- "EntityAttributes"
+recordID <- "{{{index.reference}}}"
 
 ```
 
@@ -49,7 +49,7 @@ datumList <- list(
   "recorder.name" = "Recorder Name",
   "record.notes" = "Record Notes",
   "determiner" = "Determiner Name",
-  "order" = "Order" ,
+  "order" = "{{{Order}}}" ,
   "family" = "Family",
   "sub.family" = "Sub-Family",
   "genus" = "Genus",
@@ -108,7 +108,7 @@ build the name from the data -->
 ```
 
 <!-- Automatically add images with height 1000px -->
-```{r  eval=TRUE,  include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap='Specimen images'  }
+```{r  eval=TRUE,  include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap='{{{index.reference}}} Specimen images'  }
 # Set include=TRUE to use this block
 # The fig.show='hold' is needed to wrap images.
 # Absolute path needed as a workaround to make this work with child files
@@ -187,13 +187,13 @@ temp.data <- tidyr::pivot_wider(datumTripleAll, id_cols = datumEntity,
 
 ```
 
-**Observations:** `r knitr::combine_words( observation.contents)`.
+**Observations:** 
 
 **Dissection:** 
 
 
 <!-- Automatically add dissection images with height 1000px -->
-```{r eval=TRUE, include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap= 'Temporary slide in alcohol gel.'}
+```{r eval=TRUE, include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap= '{{{index.reference}}} Temporary slide in Hoyers.'}
 # Set eval - TRUE to use.
 dissection.path <- fs::path(absolutePath,"images","dissection")
 fs::dir_create(dissection.path)

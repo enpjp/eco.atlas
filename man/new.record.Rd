@@ -4,7 +4,12 @@
 \alias{new.record}
 \title{new.record}
 \usage{
-new.record(index.reference)
+new.record(index.reference, Order = "Lepidoptera")
+}
+\arguments{
+\item{index.reference}{A unique record identifier.}
+
+\item{Order}{Record order.}
 }
 \value{
 Nothing returned
