@@ -10,7 +10,7 @@
 #'@param recorder.name Recorder Name.
 #'@param record.notes Record notes.
 #'@param determiner The determiner.
-#'@param Order Taxon order.
+#'@param order Taxon order.
 #'
 #' @return Nothing returned
 #' @export new.record
@@ -22,18 +22,18 @@ new.record <- function(index.reference,
                        recorder.name = "Recorder Name",
                        record.notes = "Record Notes",
                        determiner = "Determiner Name",
-                       Order = "Lepidoptera"
+                       order = "Lepidoptera"
                        ) {
 
   my.lists <- list(
     index.reference = index.reference,
-    record.date = "Date",
-    place.name = "Place Name",
-    grid.ref = "Grid Reference",
-    recorder.name = "Recorder Name",
-    record.notes = "Record Notes",
-    determiner = "Determiner Name",
-    order = Order
+    record.date = record.date,
+    place.name = place.name,
+    grid.ref = grid.ref,
+    recorder.name = recorder.name,
+    record.notes = record.notes,
+    determiner = determiner,
+    order = order
 
     )
 

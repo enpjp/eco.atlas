@@ -12,7 +12,7 @@ new.record(
   recorder.name = "Recorder Name",
   record.notes = "Record Notes",
   determiner = "Determiner Name",
-  Order = "Lepidoptera"
+  order = "Lepidoptera"
 )
 }
 \arguments{
@@ -30,7 +30,7 @@ new.record(
 
 \item{determiner}{The determiner.}
 
-\item{Order}{Taxon order.}
+\item{order}{Taxon order.}
 }
 \value{
 Nothing returned
