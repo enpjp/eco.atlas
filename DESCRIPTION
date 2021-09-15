@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "p.j.palmer@lboro.ac.uk",
            comment = c(ORCID = "0000-0002-1674-3728"))
-Description: What the package does (one paragraph).
+Description: These functions help with the production of markdown related reports.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
