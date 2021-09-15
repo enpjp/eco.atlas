@@ -84,7 +84,8 @@ row.names(datumTriple) <- NULL
 # Add datumTriple to the running tally of datumTriples datumTripleAll
 datumTripleAll <- rbind(datumTripleAll,datumTriple )
   
-  sectionTitle <- paste(recordID, labelTaxon, labelcommon.name, sep= " "  )
+sectionTitle <-
+  paste(recordID, " \\emph{", labelTaxon, "}", labelcommon.name, sep = " ")
 
 ```
 
@@ -108,7 +109,7 @@ build the name from the data -->
 ```
 
 <!-- Automatically add images with height 1000px -->
-```{r  eval=TRUE,  include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap='{{{index.reference}}} Specimen images'  }
+```{r  eval=TRUE,  include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap= paste(sectionTitle, 'Specimen images', sep = " ")   }
 # Set include=TRUE to use this block
 # The fig.show='hold' is needed to wrap images.
 # Absolute path needed as a workaround to make this work with child files
@@ -193,7 +194,7 @@ temp.data <- tidyr::pivot_wider(datumTripleAll, id_cols = datumEntity,
 
 
 <!-- Automatically add dissection images with height 1000px -->
-```{r eval=TRUE, include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap= '{{{index.reference}}} Temporary slide in Hoyers.'}
+```{r eval=TRUE, include=TRUE, echo=FALSE, fig.align='center', fig.show='hold', fig.cap= paste(sectionTitle, 'temporary slide in Hoyers', sep = " ")}
 # Set eval - TRUE to use.
 dissection.path <- fs::path(absolutePath,"images","dissection")
 fs::dir_create(dissection.path)
