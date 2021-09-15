@@ -1,12 +1,12 @@
 Package: eco.atlas
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Useful Functions For Biodiversity Analysis
+Version: 0.0.1.0000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Paul",
+           family = "Palmer",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "p.j.palmer@lboro.ac.uk",
+           comment = c(ORCID = "0000-0002-1674-3728"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
