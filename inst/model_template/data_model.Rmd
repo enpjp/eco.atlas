@@ -140,18 +140,8 @@ if( length(list.images) > 0) {
 ```{r  include=TRUE, echo=FALSE }
 
 datumList <- list(
-  "FW.length" = "Forewing length mm",
-  "FW.width" = "Forewing width mm",
-  "EYE.d" = "Eye diameter mm", 
-  "Ocelli" = c("Present. Absent"),
-  "Ocelli.position" = c("Anterior, Posterior"),
-  "Ocelli.angle" = "Clockwise angle from antennae",
-  "Ocelli.placement" = c("Proximal, Distal"),
-  "Labial.palps" = c("Upright, Forward, Decending"),
-  "Frons" = c("Rough, Smooth"),
-  "Vertex" = c("Rough, Smooth"),
-  "EYE.texture" = c("Hairy, Hairless"),
-  "Chaetosemata" = c("Present, Absent")
+  "List.thing" = "value"
+
 )
 
 ```
