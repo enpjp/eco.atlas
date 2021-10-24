@@ -50,14 +50,14 @@ datumList <- list(
   "record.notes" = "{{{record.notes}}}",
   "determiner" = "{{{determiner}}}",
   "order" = "{{{order}}}" ,
-  "family" = "Family",
-  "sub.family" = "Sub-Family",
-  "genus" = "Genus",
-  "taxon" = "Taxon",
-  "log.number" = "Classification Log Number",
-  "Bradley"= "Bradley Fletcher Number",
-  "common.name" = "Common Name",
-  "gender" = c("Male, Female")
+  "family" = "{{{family}}}",
+  "sub.family" = "{{{sub.family}}}",
+  "genus" = "{{{genus}}}",
+  "taxon" = "{{{taxon}}}",
+  "log.number" = "{{{log.number}}}",
+  "Bradley"= "{{{Bradley}}}",
+  "common.name" = "{{{common.name}}}",
+  "gender" = {{{gender}}}
   )
 
   dataLabelTemp <- data.frame(

@@ -12,7 +12,15 @@ new.record(
   recorder.name = "Recorder Name",
   record.notes = "Record Notes",
   determiner = "Determiner Name",
-  order = "Lepidoptera"
+  order = "Lepidoptera",
+  family = "Family",
+  sub.family = "Sub-Family",
+  genus = "Genus",
+  taxon = "Taxon",
+  log.number = "Classification Log Number",
+  Bradley = "Bradley Fletcher Number",
+  common.name = "Common Name",
+  gender = c("Male, Female")
 )
 }
 \arguments{
@@ -31,6 +39,22 @@ new.record(
 \item{determiner}{The determiner.}
 
 \item{order}{Taxon order.}
+
+\item{family}{Family.}
+
+\item{sub.family}{Sub.family often used for Lepidoptera.}
+
+\item{genus}{Genus without species name.}
+
+\item{taxon}{Genus and species name.}
+
+\item{log.number}{Log number for putting species in taxonomic order.}
+
+\item{Bradley}{Bradley Fletcher Log number.}
+
+\item{common.name}{Vernacular name.}
+
+\item{gender}{Male or Female?}
 }
 \value{
 Nothing returned

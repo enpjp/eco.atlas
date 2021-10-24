@@ -11,6 +11,14 @@
 #'@param record.notes Record notes.
 #'@param determiner The determiner.
 #'@param order Taxon order.
+#'@param family Family.
+#'@param sub.family Sub.family often used for Lepidoptera.
+#'@param genus Genus without species name.
+#'@param taxon Genus and species name.
+#'@param log.number Log number for putting species in taxonomic order.
+#'@param Bradley Bradley Fletcher Log number.
+#'@param common.name Vernacular name.
+#'@param gender Male or Female?
 #'
 #' @return Nothing returned
 #' @export new.record
@@ -22,7 +30,15 @@ new.record <- function(index.reference,
                        recorder.name = "Recorder Name",
                        record.notes = "Record Notes",
                        determiner = "Determiner Name",
-                       order = "Lepidoptera"
+                       order = "Lepidoptera",
+                       family = "Family",
+                       sub.family = "Sub-Family",
+                       genus = "Genus",
+                       taxon = "Taxon",
+                       log.number = "Classification Log Number",
+                       Bradley = "Bradley Fletcher Number",
+                       common.name = "Common Name",
+                       gender = c("Male, Female")
                        ) {
 
   my.lists <- list(
@@ -33,8 +49,15 @@ new.record <- function(index.reference,
     recorder.name = recorder.name,
     record.notes = record.notes,
     determiner = determiner,
-    order = order
-
+    order = order,
+    family = family,
+    sub.family = sub.family,
+    genus = genus,
+    taxon = taxon,
+    log.number = log.number,
+    Bradley = Bradley,
+    common.name = common.name,
+    gender = gender
     )
 
   my.working.project <- rstudioapi::getActiveProject()
