@@ -20,7 +20,7 @@ new.record(
   log.number = "Classification Log Number",
   Bradley = "Bradley Fletcher Number",
   common.name = "Common Name",
-  gender = c("Male, Female")
+  gender = "Male or Female"
 )
 }
 \arguments{

@@ -38,7 +38,7 @@ new.record <- function(index.reference,
                        log.number = "Classification Log Number",
                        Bradley = "Bradley Fletcher Number",
                        common.name = "Common Name",
-                       gender = c("Male, Female")
+                       gender = "Male or Female"
                        ) {
 
   my.lists <- list(
