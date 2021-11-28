@@ -48,6 +48,7 @@ datumList <- list(
   "grid.ref" = "{{{grid.ref}}}",
   "recorder.name" = "{{{recorder.name}}}",
   "record.notes" = "{{{record.notes}}}",
+  "method" = "{{{method}}}",
   "determiner" = "{{{determiner}}}",
   "order" = "{{{order}}}" ,
   "family" = "{{{family}}}",
