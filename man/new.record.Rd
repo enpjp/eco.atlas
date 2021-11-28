@@ -11,6 +11,7 @@ new.record(
   grid.ref = "Grid Reference",
   recorder.name = "Recorder Name",
   record.notes = "Record Notes",
+  method = "Method",
   determiner = "Determiner Name",
   order = "Lepidoptera",
   family = "Family",
@@ -35,6 +36,8 @@ new.record(
 \item{recorder.name}{Recorder Name.}
 
 \item{record.notes}{Record notes.}
+
+\item{method}{Method of recording.}
 
 \item{determiner}{The determiner.}
 
