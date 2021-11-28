@@ -9,6 +9,7 @@
 #'@param grid.ref Grid ref.
 #'@param recorder.name Recorder Name.
 #'@param record.notes Record notes.
+#'@param method Method of recording.
 #'@param determiner The determiner.
 #'@param order Taxon order.
 #'@param family Family.
@@ -29,6 +30,7 @@ new.record <- function(index.reference,
                        grid.ref = "Grid Reference",
                        recorder.name = "Recorder Name",
                        record.notes = "Record Notes",
+                       method = "Method",
                        determiner = "Determiner Name",
                        order = "Lepidoptera",
                        family = "Family",
@@ -48,6 +50,7 @@ new.record <- function(index.reference,
     grid.ref = grid.ref,
     recorder.name = recorder.name,
     record.notes = record.notes,
+    method = method,
     determiner = determiner,
     order = order,
     family = family,
