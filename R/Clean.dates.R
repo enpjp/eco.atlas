@@ -93,7 +93,7 @@ Clean.dates <- function(x) {
   # We need to do this for each date pattern in the data.
 
   # Test for dates dd/mm/yyyy
-  f.data$isadate <- grepl("\\d{2}/\\d{2}/\\d{4}",f.data$Date )
+  f.data$isadate <- grepl("\\d{1,2}/\\d{1,2}/\\d{4}",f.data$Date )
   which.rows <- which(f.data$isadate)
   # We now know which dates are true and which are false.
   f.data[which.rows,"date_format_YYYYMMDD"] <-
