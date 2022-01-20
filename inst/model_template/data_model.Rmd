@@ -58,7 +58,7 @@ datumList <- list(
   "log.number" = "{{{log.number}}}",
   "Bradley"= "{{{Bradley}}}",
   "common.name" = "{{{common.name}}}",
-  "gender" = "{{{gender}}}"
+  "creation.date" = "{{{creation.date}}"
   )
 
   dataLabelTemp <- data.frame(

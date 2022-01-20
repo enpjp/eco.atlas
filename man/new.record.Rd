@@ -4,60 +4,14 @@
 \alias{new.record}
 \title{new.record}
 \usage{
-new.record(
-  index.reference,
-  record.date = "Date",
-  place.name = "Place Name",
-  grid.ref = "Grid Reference",
-  recorder.name = "Recorder Name",
-  record.notes = "Record Notes",
-  method = "Method",
-  determiner = "Determiner Name",
-  order = "Lepidoptera",
-  family = "Family",
-  sub.family = "Sub-Family",
-  genus = "Genus",
-  taxon = "Taxon",
-  log.number = "Classification Log Number",
-  Bradley = "Bradley Fletcher Number",
-  common.name = "Common Name",
-  gender = "Male or Female"
-)
+new.record(index.reference, datum.attributes, data.model.path = NULL)
 }
 \arguments{
 \item{index.reference}{A unique record identifier.}
 
-\item{record.date}{ISO Date.}
+\item{datum.attributes}{Named list of attributes to use in template}
 
-\item{place.name}{Place name.}
-
-\item{grid.ref}{Grid ref.}
-
-\item{recorder.name}{Recorder Name.}
-
-\item{record.notes}{Record notes.}
-
-\item{method}{Method of recording.}
-
-\item{determiner}{The determiner.}
-
-\item{order}{Taxon order.}
-
-\item{family}{Family.}
-
-\item{sub.family}{Sub.family often used for Lepidoptera.}
-
-\item{genus}{Genus without species name.}
-
-\item{taxon}{Genus and species name.}
-
-\item{log.number}{Log number for putting species in taxonomic order.}
-
-\item{Bradley}{Bradley Fletcher Log number.}
-
-\item{common.name}{Vernacular name.}
-
-\item{gender}{Male or Female?}
+\item{data.model.path}{Path to external template}
 }
 \value{
 Nothing returned
