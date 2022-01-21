@@ -1,21 +1,21 @@
 
 
-#' new.record
+#'new.record
 #'
 #'
-#'@param index.reference A unique record identifier.
-#'@param datum.attributes Named list of attributes to use in template
+#'@param datum.attributes Named list of attributes to use in template. must
+#'  begin with index.reference a unique record identifier.
 #'@param data.model.path Path to external template
 
 #'
 #' @return Nothing returned
 #' @export new.record
 #'
-new.record <- function(index.reference,
+new.record <- function(
                        datum.attributes,
                        data.model.path = NULL
                        ) {
-
+  index.reference <- datum.attributes$index.reference
   my.lists <- datum.attributes
   my.working.project <- rstudioapi::getActiveProject()
 

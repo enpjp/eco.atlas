@@ -4,12 +4,11 @@
 \alias{new.record}
 \title{new.record}
 \usage{
-new.record(index.reference, datum.attributes, data.model.path = NULL)
+new.record(datum.attributes, data.model.path = NULL)
 }
 \arguments{
-\item{index.reference}{A unique record identifier.}
-
-\item{datum.attributes}{Named list of attributes to use in template}
+\item{datum.attributes}{Named list of attributes to use in template. must
+begin with index.reference a unique record identifier.}
 
 \item{data.model.path}{Path to external template}
 }
