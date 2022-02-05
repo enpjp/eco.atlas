@@ -24,8 +24,10 @@ new.record <- function(
   dir.create(index.reference)
 
   # Now create an images directory
-  images.dir <- fs::path(my.working.directory,index.reference, "images")
-  dir.create(images.dir)
+  images.dir <- fs::path(my.working.directory,index.reference, "images","dissection")
+  dir.create(images.dir, recursive = TRUE)
+
+
 
   # Path to inst
   if(is.null(data.model.path)) {
