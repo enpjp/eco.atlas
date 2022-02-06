@@ -55,6 +55,7 @@ datumList <- list(
   "sub.family" = "{{{sub.family}}}",
   "genus" = "{{{genus}}}",
   "taxon" = "{{{taxon}}}",
+  "gender" = "{{{gender}}}",
   "log.number" = "{{{log.number}}}",
   "Bradley"= "{{{Bradley}}}",
   "common.name" = "{{{common.name}}}"
