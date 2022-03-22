@@ -19,6 +19,9 @@
       # Remove any rows with NA
       data.for.spatial <- stats::na.omit(GBNG)
 
+      # Remove any white space
+      data.for.spatial <-  gsub("[[:space:]]", "", data.for.spatial)
+
       # Rough check for sensible Grid reference format
       #rows.with.GR <- grepl("([A-Z]{2})(\\d{4}|\\d{6}|\\d{8}|\\d{10})$",data.for.spatial )
       # Make a list of those rows

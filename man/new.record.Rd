@@ -4,13 +4,15 @@
 \alias{new.record}
 \title{new.record}
 \usage{
-new.record(datum.attributes, data.model.path = NULL)
+new.record(datum.attributes, data.model.path = NULL, overwrite = FALSE)
 }
 \arguments{
 \item{datum.attributes}{Named list of attributes to use in template. must
 begin with index.reference a unique record identifier.}
 
 \item{data.model.path}{Path to external template}
+
+\item{overwrite}{Should existing data be overwritten?}
 }
 \value{
 Nothing returned
