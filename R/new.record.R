@@ -48,7 +48,7 @@ new.record <- function(
                                  index.reference,
                                  "images",
                                  "dissection")
-          fs::dir_create(images.dir, recursive = TRUE)
+          fs::dir_create(images.dir, recurse = TRUE)
           # create a placeholder for git
           readr::write_file( "Images here." ,
                              fs::path( images.dir,
