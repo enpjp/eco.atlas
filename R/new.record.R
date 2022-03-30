@@ -44,9 +44,17 @@ new.record <- function(
           dir.create(index.reference)
 
           # Now create an images directory
-          images.dir <- fs::path(my.working.directory,index.reference, "images","dissection")
-          dir.create(images.dir, recursive = TRUE)
+          images.dir <- fs::path(my.working.directory,
+                                 index.reference,
+                                 "images",
+                                 "dissection")
+          fs::dir_create(images.dir, recursive = TRUE)
+          # create a placeholder for git
+          fs::file_create(   fs::path( images.dir,
+                                       "image_placeholder",
+                                       ext = "txt"
 
+            ) )
 
 
           # Path to inst
