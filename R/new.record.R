@@ -50,7 +50,8 @@ new.record <- function(
                                  "dissection")
           fs::dir_create(images.dir, recursive = TRUE)
           # create a placeholder for git
-          fs::file_create(   fs::path( images.dir,
+          readr::write_file( "Images here." ,
+                             fs::path( images.dir,
                                        "image_placeholder",
                                        ext = "txt"
 
