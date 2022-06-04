@@ -22,13 +22,10 @@ Imports:
     fs,
     readxl,
     magick,
-    gridExtra,
-    grid,
     stringr,
     rprojroot,
     bookdown,
     rstudioapi,
     tools,
-    usethis,
     readr,
     whisker
