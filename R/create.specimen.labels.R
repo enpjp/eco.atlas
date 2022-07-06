@@ -49,8 +49,8 @@ create.specimen.labels <- function(data.ss.for.label, file.for.output = "label")
 
   # Now create the template file
   my.template <- readr::read_file(data.model.path) %>%   as.character()
-  square.tdf.path <- system.file("latex_template","square.tdf",package = "eco.atlas")
-  square.tdf <- readr::read_file(data.model.path) %>%   as.character()
+  square.tdf.path <- system.file("latex_template","square.tdf", package = "eco.atlas")
+  square.tdf <- readr::read_file(square.tdf.path) %>%   as.character()
 
   # Save the tdf file as latex needs it
   readr::write_file(square.tdf,  "square.tdf")
