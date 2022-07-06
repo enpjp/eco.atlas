@@ -4,7 +4,7 @@
 \alias{create.specimen.labels}
 \title{A Function To Create Data Labels}
 \usage{
-create.specimen.labels(data.ss.for.label, file.for.output = "label.tex")
+create.specimen.labels(data.ss.for.label, file.for.output = "label")
 }
 \arguments{
 \item{data.ss.for.label}{Should contain datumEntity}

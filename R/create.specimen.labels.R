@@ -7,7 +7,7 @@
 #' @export create.specimen.labels
 #'
 
-create.specimen.labels <- function(data.ss.for.label, file.for.output = "label.tex"){
+create.specimen.labels <- function(data.ss.for.label, file.for.output = "label"){
 
   label.data.raw <- data.ss.for.label
 
@@ -38,8 +38,24 @@ create.specimen.labels <- function(data.ss.for.label, file.for.output = "label.t
                                   "\n")
   )
 
+  # Make as a one item list
 
+  my.lists <- list( cards =  formatted.for.tex  )
 
-  cat(formatted.for.tex, file = file.for.output)
+# Now to create a Latex file
+
+  data.model.path <- system.file("latex_template","specimen_label.Rmd",package = "eco.atlas")
+
+  # Now create the template file
+  my.template <- readr::read_file(data.model.path) %>%   as.character()
+
+  my.rendered.output <-
+    whisker::whisker.render(my.template, data = my.lists, strict = FALSE)
+
+  rendered.path <- fs::path(file.for.output , ext = "tex")
+
+  readr::write_file(my.rendered.output, rendered.path)
+
+#  cat(formatted.for.tex, file = file.for.output)
 
 }
