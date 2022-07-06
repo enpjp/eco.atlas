@@ -2,8 +2,9 @@
 #'
 #' This function creates a skeleton file to be compiled with Latex
 #'
-#' @param data.ss.for.label Should contain datumEntity
-#' @param file.for.output Name of file to save
+#' @param data.ss.for.label Should contain datumEntity, record.date, site,
+#'   grid.ref,recorder.name, method, Code.
+#' @param file.for.output Name of file to save. Do not add the extension.
 #' @export create.specimen.labels
 #'
 
@@ -52,9 +53,12 @@ create.specimen.labels <- function(data.ss.for.label, file.for.output = "label")
   my.rendered.output <-
     whisker::whisker.render(my.template, data = my.lists, strict = FALSE)
 
+  # The multi line list inserts a comma for each row which needs to be removed.
+  my.rendered.output.cleaned <-  gsub("\n,","\n", my.rendered.output )
+
   rendered.path <- fs::path(file.for.output , ext = "tex")
 
-  readr::write_file(my.rendered.output, rendered.path)
+  readr::write_file(my.rendered.output.cleaned, rendered.path)
 
 #  cat(formatted.for.tex, file = file.for.output)
 

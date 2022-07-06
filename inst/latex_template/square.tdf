@@ -1,0 +1,12 @@
+%%
+%% Specimen label. 
+%%
+\unitlength=1mm
+\hoffset=-1mm
+\voffset=-1mm
+
+\ticketNumbers{7}{10}
+
+\ticketSize{18}{18} % in unitlength
+\ticketDistance{5}{5} %in unitlength
+

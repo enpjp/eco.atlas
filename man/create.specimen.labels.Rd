@@ -7,9 +7,10 @@
 create.specimen.labels(data.ss.for.label, file.for.output = "label")
 }
 \arguments{
-\item{data.ss.for.label}{Should contain datumEntity}
+\item{data.ss.for.label}{Should contain datumEntity, record.date, site,
+grid.ref,recorder.name, method, Code.}
 
-\item{file.for.output}{Name of file to save}
+\item{file.for.output}{Name of file to save. Do not add the extension.}
 }
 \description{
 This function creates a skeleton file to be compiled with Latex
