@@ -5,10 +5,13 @@
 #' @param data.ss.for.label Should contain datumEntity, record.date, site,
 #'   grid.ref,recorder.name, method, Code.
 #' @param file.for.output Name of file to save. Do not add the extension.
+#' @param make.pdf Automatically build the PDF file.
 #' @export create.specimen.labels
 #'
 
-create.specimen.labels <- function(data.ss.for.label, file.for.output = "label"){
+create.specimen.labels <- function(data.ss.for.label,
+                                   file.for.output = "label",
+                                   make.pdf = TRUE){
 
   label.data.raw <- data.ss.for.label
 
@@ -49,10 +52,12 @@ create.specimen.labels <- function(data.ss.for.label, file.for.output = "label")
 
   # Now create the template file
   my.template <- readr::read_file(data.model.path) %>%   as.character()
+
+  # Get the latex defintion file
   square.tdf.path <- system.file("latex_template","square.tdf", package = "eco.atlas")
   square.tdf <- readr::read_file(square.tdf.path) %>%   as.character()
 
-  # Save the tdf file as latex needs it
+  # Save the tdf file as latex needs it to set the label size
   readr::write_file(square.tdf,  "square.tdf")
 
 
@@ -65,6 +70,10 @@ create.specimen.labels <- function(data.ss.for.label, file.for.output = "label")
   rendered.path <- fs::path(file.for.output , ext = "tex")
 
   readr::write_file(my.rendered.output.cleaned, rendered.path)
+
+  # Finally run latex to build the PDF if option TRUE
+
+  tools::texi2dvi(rendered.path, pdf = TRUE, clean = TRUE)
 
 #  cat(formatted.for.tex, file = file.for.output)
 
