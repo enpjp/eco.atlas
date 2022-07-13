@@ -13,6 +13,15 @@ create.specimen.labels <- function(data.ss.for.label,
                                    file.for.output = "label",
                                    make.pdf = TRUE){
 
+  # Sometimes "Code" is NA as not ID but an aggregate is recorded in taxon
+  empty.codes <- is.na(as.numeric(data.ss.for.label$Code))
+
+    data.ss.for.label$Code[empty.codes] <-
+      data.ss.for.label$taxon[empty.codes]
+
+
+
+
   label.data.raw <- data.ss.for.label
 
   cols.to.keep <-  c("datumEntity",
