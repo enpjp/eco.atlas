@@ -7,7 +7,8 @@
 create.specimen.labels(
   data.ss.for.label,
   file.for.output = "label",
-  make.pdf = TRUE
+  make.pdf = TRUE,
+  small.label = FALSE
 )
 }
 \arguments{
@@ -17,6 +18,8 @@ grid.ref,recorder.name, method, Code.}
 \item{file.for.output}{Name of file to save. Do not add the extension.}
 
 \item{make.pdf}{Automatically build the PDF file.}
+
+\item{small.label}{Logical: make small labels.}
 }
 \description{
 This function creates a skeleton file to be compiled with Latex

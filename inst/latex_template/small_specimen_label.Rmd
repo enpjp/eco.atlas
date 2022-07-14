@@ -10,7 +10,7 @@
 \usepackage{lmodern}
 \usepackage{fmtcount}
 % load ticket.sty with the appropriate ticket definition
-	\usepackage[square,emptycrossmark,rowmode]{ticket}
+	\usepackage[smallsquare,emptycrossmark,rowmode]{ticket}
 %\usepackage[square,emptycrossmark]{ticket}
 
 % load misc stuff

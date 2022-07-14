@@ -6,12 +6,14 @@
 #'   grid.ref,recorder.name, method, Code.
 #' @param file.for.output Name of file to save. Do not add the extension.
 #' @param make.pdf Automatically build the PDF file.
+#' @param small.label Logical: make small labels.
 #' @export create.specimen.labels
 #'
 
 create.specimen.labels <- function(data.ss.for.label,
                                    file.for.output = "label",
-                                   make.pdf = TRUE){
+                                   make.pdf = TRUE,
+                                   small.label = FALSE){
 
   # Sometimes "Code" is NA as not ID but an aggregate is recorded in taxon
   empty.codes <- is.na(as.numeric(data.ss.for.label$Code))
@@ -56,18 +58,38 @@ create.specimen.labels <- function(data.ss.for.label,
   my.lists <- list( cards =  formatted.for.tex  )
 
 # Now to create a Latex file
+  if(small.label){
+    data.model.path <- system.file("latex_template","small_specimen_label.Rmd",
+                                   package = "eco.atlas")
+  }else{
+    data.model.path <- system.file("latex_template","specimen_label.Rmd",
+                                   package = "eco.atlas")
+  }
 
-  data.model.path <- system.file("latex_template","specimen_label.Rmd",package = "eco.atlas")
 
   # Now create the template file
+
   my.template <- readr::read_file(data.model.path) %>%   as.character()
 
-  # Get the latex defintion file
-  square.tdf.path <- system.file("latex_template","square.tdf", package = "eco.atlas")
-  square.tdf <- readr::read_file(square.tdf.path) %>%   as.character()
+  # Get the latex definition file
+  if(small.label){
+    square.tdf.path <- system.file("latex_template","small.square.tdf",
+                                   package = "eco.atlas")
+    square.tdf <- readr::read_file(square.tdf.path) %>%   as.character()
+    # Save the tdf file as latex needs it to set the label size
+    readr::write_file(square.tdf,  "smallsquare.tdf")
 
-  # Save the tdf file as latex needs it to set the label size
-  readr::write_file(square.tdf,  "square.tdf")
+
+  }else{
+    square.tdf.path <- system.file("latex_template","square.tdf",
+                                   package = "eco.atlas")
+    square.tdf <- readr::read_file(square.tdf.path) %>%   as.character()
+    # Save the tdf file as latex needs it to set the label size
+    readr::write_file(square.tdf,  "square.tdf")
+
+  }
+
+
 
 
   my.rendered.output <-
