@@ -28,8 +28,9 @@ create.specimen.labels <- function(data.ss.for.label,
       data.ss.for.label$taxon[empty.codes]
 
 if(last.line.comment){
-
-  data.ss.for.label$Code <- data.ss.for.label$comments
+   comments <- stringr::str_replace_all(data.ss.for.label$comments, "[^[:alnum:]]", " ")
+   comments.squish <- stringr::str_squish(comments)
+  data.ss.for.label$Code <- stringr::word(comments.squish, start = 1,end =2)
 }
 
 
