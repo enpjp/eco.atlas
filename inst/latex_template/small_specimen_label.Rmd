@@ -1,0 +1,70 @@
+%%%%
+%
+% ticket.sty example file for empty cross-marks
+%
+%%%%
+% use the corresponding paper size for your ticket definition
+\documentclass[a4paper]{letter}
+
+
+\usepackage{lmodern}
+\usepackage{fmtcount}
+% load ticket.sty with the appropriate ticket definition
+	\usepackage[square,emptycrossmark,rowmode]{ticket}
+%\usepackage[square,emptycrossmark]{ticket}
+
+% load misc stuff
+\usepackage{graphicx}
+\usepackage{color}
+%\usepackage{layout}
+
+% make your default ticket. \ticketdefault is somewhat like a background
+% here it is empty, because we use different tickets for the front an
+% the back of our card
+\renewcommand{\ticketdefault}{%
+}
+
+% now what do you like to put in your ticket
+\newcommand{\acard}[7]{\ticket{%
+    \put( 1, 10){#1}% datumEntity
+    \put( 1, 8.0){#2}% record.date
+    \put( 1, 6.5){#3}% Site
+    \put( 1, 5.0){#4}% grid.ref
+    \put( 1, 3.5){#5}% recorder.name
+    \put( 1, 2){#6}% Method
+    \put( 1, 0.5){#7}% BF code
+}}
+
+
+% \put( 2, 1){Number:\bfseries #1}
+% a counter, which makes life easier...
+%\newcounter{numcards}
+%
+%%
+%\newcounter{numcards}%
+%\newcommand{\printcntr}{%
+%	\padzeroes[3]{\decimal{numcards}} %
+%}
+
+
+\begin{document}
+	
+%\layout\newpage
+\sffamily
+\fontsize{3.5pt}{3.5pt}
+\selectfont
+
+{{{cards}}}
+
+
+% cards with crossmarks
+%\setcounter{numcards}{0}\ticketreset\clearpage%
+%\makeatletter\@boxedfalse\@crossmarktrue\makeatother
+%\whiledo{\thenumcards<3}{\stepcounter{numcards}\acard{\printcntr}}%
+
+%\acard
+
+
+\end{document}
+
+
