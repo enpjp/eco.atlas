@@ -7,21 +7,30 @@
 #' @param file.for.output Name of file to save. Do not add the extension.
 #' @param make.pdf Automatically build the PDF file.
 #' @param small.label Logical: make small labels.
+#' @param last.line.comment Logical: Use the comments field for the last line.
 #' @export create.specimen.labels
+#'
 #'
 
 create.specimen.labels <- function(data.ss.for.label,
                                    file.for.output = "label",
                                    make.pdf = TRUE,
-                                   small.label = FALSE){
+                                   small.label = FALSE,
+                                   last.line.comment = FALSE){
 
   # Sometimes "Code" is NA as not ID but an aggregate is recorded in taxon
-  empty.codes <- is.na(as.numeric(data.ss.for.label$Code))
+  empty.codes <- is.na(
+    suppressWarnings(as.numeric(data.ss.for.label$Code)
+                     )
+                    )
 
     data.ss.for.label$Code[empty.codes] <-
       data.ss.for.label$taxon[empty.codes]
 
+if(last.line.comment){
 
+  data.ss.for.label$Code <- data.ss.for.label$comments
+}
 
 
   label.data.raw <- data.ss.for.label

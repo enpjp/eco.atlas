@@ -8,7 +8,8 @@ create.specimen.labels(
   data.ss.for.label,
   file.for.output = "label",
   make.pdf = TRUE,
-  small.label = FALSE
+  small.label = FALSE,
+  last.line.comment = FALSE
 )
 }
 \arguments{
@@ -20,6 +21,8 @@ grid.ref,recorder.name, method, Code.}
 \item{make.pdf}{Automatically build the PDF file.}
 
 \item{small.label}{Logical: make small labels.}
+
+\item{last.line.comment}{Logical: Use the comments field for the last line.}
 }
 \description{
 This function creates a skeleton file to be compiled with Latex
