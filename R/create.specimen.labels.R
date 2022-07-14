@@ -30,7 +30,9 @@ create.specimen.labels <- function(data.ss.for.label,
 if(last.line.comment){
    comments <- stringr::str_replace_all(data.ss.for.label$comments, "[^[:alpha:]]", " ")
    comments.squish <- stringr::str_squish(comments)
-  data.ss.for.label$Code <- stringr::word(comments.squish, start = 1,end =2)
+   comments.words <-  stringr::str_trunc(comments.squish, 17,"right")
+
+  data.ss.for.label$Code <- comments.words
 }
 
 
