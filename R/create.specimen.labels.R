@@ -35,6 +35,15 @@ if(last.line.comment){
   data.ss.for.label$Code <- comments.words
 }
 
+    # Sometimes recorder names too long
+
+    data.ss.for.label$recorder.name <- stringr::str_trunc(
+      data.ss.for.label$recorder.name,
+      17,
+      "right")
+
+
+
 
   label.data.raw <- data.ss.for.label
 
