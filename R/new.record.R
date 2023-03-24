@@ -7,6 +7,8 @@
 #'  begin with index.reference a unique record identifier.
 #'@param data.model.path Path to external template
 #'@param overwrite Should existing data be overwritten?
+#'@param record.path Path to save records
+#'@param sub.dir Group records into subdirectory
 #'
 #' @return Nothing returned
 #' @export new.record
@@ -14,17 +16,25 @@
 new.record <- function(
                        datum.attributes,
                        data.model.path = NULL,
-                       overwrite = FALSE
+                       overwrite = FALSE,
+                       record.path,
+                       sub.dir = NULL
                        ) {
   index.reference <- datum.attributes$index.reference
   my.lists <- datum.attributes
-  my.working.project <- rstudioapi::getActiveProject()
+ # my.working.project <- rstudioapi::getActiveProject()
 
-  my.working.directory <- fs::path(getwd())
+  my.working.directory <- record.path
+
+  if(!is.null(sub.dir)){
+
+    my.working.directory <- fs::path(my.working.directory, sub.dir)
+  }
 
   # Only overwrite if flag true
 
-   does.dir.exist <- fs::dir_exists(index.reference)
+   does.dir.exist <- fs::dir_exists(
+     fs::path(my.working.directory , index.reference))
 
    if(does.dir.exist){
       if(overwrite){
@@ -41,7 +51,7 @@ new.record <- function(
 
 
 
-          dir.create(index.reference)
+          dir.create(fs::path(my.working.directory , index.reference))
 
           # Now create an images directory
           images.dir <- fs::path(my.working.directory,
