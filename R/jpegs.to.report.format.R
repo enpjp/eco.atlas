@@ -26,7 +26,27 @@ jpegs.to.report.format <- function(jpg.path = "_records"){
 
   file.rename(from = files.to.rename, to = rename.files.to )
 
+  # Now read all the files and rename them syntactically
 
+  my.jpeg.files <- list.files(
+    path.to.jpeg.data,
+    pattern = ".jp?g$", # Make a suitable filter.
+    full.names = TRUE,
+    recursive = TRUE)
+
+  bad.name <- basename(my.jpeg.files)
+  bad.name.no.ext         <-  fs::path_ext_remove(bad.name)
+  nice.name <-  janitor::make_clean_names(bad.name.no.ext)
+
+ path.name <- dirname(my.jpeg.files)
+
+ nice.path.name <- fs::path( path.name, nice.name, ext = "jpg")
+
+
+
+  file.rename(from = my.jpeg.files, to = nice.path.name )
+
+# And read again to resize
   my.jpeg.files <- list.files(
     path.to.jpeg.data,
     pattern = ".jp?g$", # Make a suitable filter.

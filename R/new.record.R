@@ -92,7 +92,7 @@ new.record <- function(
 
 
 
-     dir.create(index.reference)
+     fs::dir_create(fs::path(my.working.directory, index.reference))
 
      # Now create an images directory
      images.dir <- fs::path(my.working.directory,
