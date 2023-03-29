@@ -28,5 +28,10 @@ Imports:
     tools,
     readr,
     whisker,
-    janitor
+    janitor,
+    dplyr,
+    tibble,
+    utils
 RoxygenNote: 7.2.2
+Depends: 
+    R (>= 2.10)
