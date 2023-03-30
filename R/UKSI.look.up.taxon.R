@@ -148,8 +148,8 @@ UKSI.look.up.taxon <- function(taxon) {
 
 
 
-      genus.out <- UKSI.taxa %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
-        filter(ORGANISM_KEY == fa.name.TVK$PARENT_KEY) %>% head(n = 1)
+#      genus.out <- UKSI.taxa %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
+#        filter(ORGANISM_KEY == fa.name.TVK$PARENT_KEY) %>% head(n = 1)
 
      cols.to.use <- c("TAXON_VERSION_KEY",
                       "RANK",
@@ -158,12 +158,23 @@ UKSI.look.up.taxon <- function(taxon) {
                      "PARENT_KEY")
 
        UKSI.taxa <- UKSI.taxa[,cols.to.use]
-       genus.out <- UKSI.taxa[UKSI.taxa$ORGANISM_KEY == fa.name.TVK$PARENT_KEY,]
+       genus.out <- UKSI.taxa[UKSI.taxa$ORGANISM_KEY == fa.name.TVK$PARENT_KEY,] %>% head(n = 1)
 
 
 
       family.out <- UKSI.taxa %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
         filter(ORGANISM_KEY == genus.out$PARENT_KEY) %>% head(n = 1)
+
+      cols.to.use <- c("TAXON_VERSION_KEY",
+                       "RANK",
+                       "TAXON_NAME",
+                       "ORGANISM_KEY",
+                       "PARENT_KEY" )
+
+      UKSI.taxa <- UKSI.taxa[,cols.to.use]
+
+      family.out <- UKSI.taxa[ UKSI.taxa$ORGANISM_KEY == genus.out$PARENT_KEY,] %>% head(n = 1)
+
 
       order.out <- UKSI.taxa %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
         filter(ORGANISM_KEY == family.out$PARENT_KEY) %>% head(n = 1)
