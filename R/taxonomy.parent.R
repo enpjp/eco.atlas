@@ -12,10 +12,10 @@ taxonomy.parent <- function(taxon_key) {
 
   UKSI.taxa.cols <- TAXA[,cols.to.use]
   parent.out <- UKSI.taxa.cols[
-    UKSI.taxa.cols$ORGANISM_KEY == taxon_key,] %>% head(n = 1)
+    UKSI.taxa.cols$TAXON_VERSION_KEY == taxon_key,] %>% head(n = 1)
 
   out.cols <- data.frame (parent.out$TAXON_NAME )
- colnames(out.cols)[1] <- parent.out$RANK
+ colnames(out.cols) <- parent.out$RANK
 
 # Now add a while loop to climb all the way up the taxonomy tree.
  # Add a counter to stop after 20 steps anyway.
