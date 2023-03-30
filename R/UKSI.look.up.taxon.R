@@ -141,7 +141,7 @@ UKSI.look.up.taxon <- function(taxon) {
                        "TAXON_VERSION_KEY"
       )
 
-      UKSI.taxa.selected <- UKSI.taxa[,cols.to.use]
+      UKSI.taxa.selected <- TAXA[,cols.to.use]
       UKSI.taxa.filtered <- UKSI.taxa.selected[
         UKSI.taxa.selected$TAXON_VERSION_KEY == TVK.to.use,]
       fa.name.TVK <- head(UKSI.taxa.filtered, n=1)
@@ -157,12 +157,12 @@ UKSI.look.up.taxon <- function(taxon) {
                      "ORGANISM_KEY",
                      "PARENT_KEY")
 
-       UKSI.taxa <- UKSI.taxa[,cols.to.use]
-       genus.out <- UKSI.taxa[UKSI.taxa$ORGANISM_KEY == fa.name.TVK$PARENT_KEY,] %>% head(n = 1)
+       UKSI.taxa.cols <- TAXA[,cols.to.use]
+       genus.out <- UKSI.taxa.cols[UKSI.taxa.cols$ORGANISM_KEY == fa.name.TVK$PARENT_KEY,] %>% head(n = 1)
 
 
 
-      family.out <- UKSI.taxa %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
+      family.out <- TAXA %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
         filter(ORGANISM_KEY == genus.out$PARENT_KEY) %>% head(n = 1)
 
       cols.to.use <- c("TAXON_VERSION_KEY",
@@ -171,16 +171,36 @@ UKSI.look.up.taxon <- function(taxon) {
                        "ORGANISM_KEY",
                        "PARENT_KEY" )
 
-      UKSI.taxa <- UKSI.taxa[,cols.to.use]
+      UKSI.taxa.cols <- TAXA[,cols.to.use]
 
-      family.out <- UKSI.taxa[ UKSI.taxa$ORGANISM_KEY == genus.out$PARENT_KEY,] %>% head(n = 1)
+      family.out <- UKSI.taxa.cols[ UKSI.taxa.cols$ORGANISM_KEY == genus.out$PARENT_KEY,] %>% head(n = 1)
 
 
-      order.out <- UKSI.taxa %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
-        filter(ORGANISM_KEY == family.out$PARENT_KEY) %>% head(n = 1)
+ #     order.out <- TAXA %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
+ #       filter(ORGANISM_KEY == family.out$PARENT_KEY) %>% head(n = 1)
 
-      sort_order <- UKSI.taxa %>% select(TAXON_VERSION_KEY,TAXON_AUTHORITY, SORT_ORDER) %>%
-        filter(TAXON_VERSION_KEY ==  TVK.to.use) %>% head(n = 1)
+      cols.to.use <- c("TAXON_VERSION_KEY",
+                       "RANK",
+                       "TAXON_NAME",
+                       "ORGANISM_KEY",
+                       "PARENT_KEY"
+      )
+
+      TAXA.cols <- TAXA[,cols.to.use]
+
+      order.out <- TAXA.cols[TAXA.cols$ORGANISM_KEY == family.out$PARENT_KEY,] %>% head(n = 1)
+
+ #     sort_order <- TAXA %>% select(TAXON_VERSION_KEY,TAXON_AUTHORITY, SORT_ORDER) %>%
+ #       filter(TAXON_VERSION_KEY ==  TVK.to.use) %>% head(n = 1)
+
+      cols.to.use <- c( "TAXON_VERSION_KEY",
+                        "TAXON_AUTHORITY",
+                        "SORT_ORDER"
+      )
+
+      TAXA.cols <- TAXA[, cols.to.use]
+
+      sort_order <- TAXA.cols[TAXA.cols$TAXON_VERSION_KEY == TVK.to.use,] %>% head(n = 1)
 
       # all.names.out <- bind_rows(en.names.out,la.names.out)
       #
