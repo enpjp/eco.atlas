@@ -124,7 +124,7 @@ UKSI.look.up.taxon <- function(taxon) {
                          NAME_FORM_en = en.names.out$NAME_FORM,
                         name_level_en = en.names.out$levels)
 
-      en.output.arranged <-  arrange(en.output.tibble, name_level_en) %>% head(n = 1)
+      en.output.arranged <-  arrange(en.output.tibble, "name_level_en") %>% head(n = 1)
 
       en.output.df <- head(en.output.arranged, n=1)
 
@@ -162,8 +162,8 @@ UKSI.look.up.taxon <- function(taxon) {
 
 
 
-      family.out <- TAXA %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
-        filter(ORGANISM_KEY == genus.out$PARENT_KEY) %>% head(n = 1)
+#      family.out <- TAXA %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
+#        filter(ORGANISM_KEY == genus.out$PARENT_KEY) %>% head(n = 1)
 
       cols.to.use <- c("TAXON_VERSION_KEY",
                        "RANK",
