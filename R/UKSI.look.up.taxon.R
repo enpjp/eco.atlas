@@ -138,12 +138,13 @@ UKSI.look.up.taxon <- function(taxon) {
       taxonomy.ladder <- taxonomy.cols[, !names(taxonomy.cols) == "Species"]
 
       # Construct a tibble for output
+      TAXON_AUTHORITY_clean  <-   brackets(la.names.out$TAXON_AUTHORITY)
 
       All.names.out <- tibble::tibble(
         requested.taxon = taxon,
         TVK =  TVK.to.use,
         recommended_species = la.output.df$taxon_name,
-        authority = la.names.out$TAXON_AUTHORITY,
+        authority = TAXON_AUTHORITY_clean,
         vernacular = en.names.out$TAXON_NAME
 
       ) %>% head(n=1)
