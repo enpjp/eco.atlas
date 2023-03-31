@@ -75,7 +75,7 @@ UKSI.look.up.taxon <- function(taxon) {
 
       en.names.out$NAME_FORM <- factor( en.names.out$NAME_FORM, c("W", "I", "R","S")  )
       en.names.out$levels <- as.numeric(en.names.out$NAME_FORM)
-   #   en.names.out <- en.names.out %>% arrange(levels)
+      en.names.out <- en.names.out %>% arrange(levels) %>% head(n=1)
 
 
  #     la.names.out <- NAMES %>% select(NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME,TAXON_NAME,NAME_FORM, LANGUAGE) %>%
@@ -85,6 +85,7 @@ UKSI.look.up.taxon <- function(taxon) {
 
       cols.to.use <- c("NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME",
                        "TAXON_NAME",
+                       "TAXON_AUTHORITY",
                        "NAME_FORM",
                        "LANGUAGE"
       )
@@ -108,6 +109,7 @@ UKSI.look.up.taxon <- function(taxon) {
       #
       la.output.tibble <-  tibble::tibble(TVK =  TVK.to.use,
                                           taxon_name =  la.names.out$TAXON_NAME,
+                                          taxon_authority = la.names.out$TAXON_AUTHORITY,
                                           NAME_FORM_la = la.names.out$NAME_FORM,
                                           name_level_la = la.names.out$levels)
       la.output.arranged <- arrange(la.output.tibble, "name_level_la")
@@ -128,102 +130,25 @@ UKSI.look.up.taxon <- function(taxon) {
 
       en.output.df <- head(en.output.arranged, n=1)
 
+      # Walk up the taxonomy
 
+      taxonomy.cols <-    taxonomy.parent(TVK.to.use)
+      # drop the Species name if it is there as we already have it
 
-      # Family
-      # fa.name.TVK <-   UKSI.taxa %>% select(PARENT_KEY, TAXON_VERSION_KEY) %>%
-      #   filter(TAXON_VERSION_KEY ==  TVK.to.use) %>% head(n = 1)
- #     UKSI.taxa.selected <- select(UKSI.taxa,   "PARENT_KEY", "TAXON_VERSION_KEY")
- #     UKSI.taxa.filtered <-  filter(UKSI.taxa.selected,  TAXON_VERSION_KEY ==  TVK.to.use)
- #     fa.name.TVK <- head(UKSI.taxa.filtered, n=1)
-
-      cols.to.use <- c("PARENT_KEY",
-                       "TAXON_VERSION_KEY"
-      )
-
-      UKSI.taxa.selected <- TAXA[,cols.to.use]
-      UKSI.taxa.filtered <- UKSI.taxa.selected[
-        UKSI.taxa.selected$TAXON_VERSION_KEY == TVK.to.use,]
-      fa.name.TVK <- head(UKSI.taxa.filtered, n=1)
-
-
-
-#      genus.out <- UKSI.taxa %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
-#        filter(ORGANISM_KEY == fa.name.TVK$PARENT_KEY) %>% head(n = 1)
-
-     cols.to.use <- c("TAXON_VERSION_KEY",
-                      "RANK",
-                     "TAXON_NAME",
-                     "ORGANISM_KEY",
-                     "PARENT_KEY")
-
-       UKSI.taxa.cols <- TAXA[,cols.to.use]
-       genus.out <- UKSI.taxa.cols[UKSI.taxa.cols$ORGANISM_KEY == fa.name.TVK$PARENT_KEY,] %>% head(n = 1)
-
-
-
-#      family.out <- TAXA %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
-#        filter(ORGANISM_KEY == genus.out$PARENT_KEY) %>% head(n = 1)
-
-      cols.to.use <- c("TAXON_VERSION_KEY",
-                       "RANK",
-                       "TAXON_NAME",
-                       "ORGANISM_KEY",
-                       "PARENT_KEY" )
-
-      UKSI.taxa.cols <- TAXA[,cols.to.use]
-
-      family.out <- UKSI.taxa.cols[ UKSI.taxa.cols$ORGANISM_KEY == genus.out$PARENT_KEY,] %>% head(n = 1)
-
-
- #     order.out <- TAXA %>% select(TAXON_VERSION_KEY, RANK, TAXON_NAME, ORGANISM_KEY, PARENT_KEY) %>%
- #       filter(ORGANISM_KEY == family.out$PARENT_KEY) %>% head(n = 1)
-
-      cols.to.use <- c("TAXON_VERSION_KEY",
-                       "RANK",
-                       "TAXON_NAME",
-                       "ORGANISM_KEY",
-                       "PARENT_KEY"
-      )
-
-      TAXA.cols <- TAXA[,cols.to.use]
-
-      order.out <- TAXA.cols[TAXA.cols$ORGANISM_KEY == family.out$PARENT_KEY,] %>% head(n = 1)
-
- #     sort_order <- TAXA %>% select(TAXON_VERSION_KEY,TAXON_AUTHORITY, SORT_ORDER) %>%
- #       filter(TAXON_VERSION_KEY ==  TVK.to.use) %>% head(n = 1)
-
-      cols.to.use <- c( "TAXON_VERSION_KEY",
-                        "TAXON_AUTHORITY",
-                        "SORT_ORDER"
-      )
-
-      TAXA.cols <- TAXA[, cols.to.use]
-
-      sort_order <- TAXA.cols[TAXA.cols$TAXON_VERSION_KEY == TVK.to.use,] %>% head(n = 1)
-
-      # all.names.out <- bind_rows(en.names.out,la.names.out)
-      #
-      # all.names.out$NAME_FORM <- factor( all.names.out$NAME_FORM, c("W", "I", "R","S")       )
-      #
-      # all.names.out$levels <- as.numeric(all.names.out$NAME_FORM)
-
-      # All.names.out <- cbind(la.output.df, en.output.df)
+      taxonomy.ladder <- taxonomy.cols[, !names(taxonomy.cols) == "Species"]
 
       # Construct a tibble for output
 
       All.names.out <- tibble::tibble(
         requested.taxon = taxon,
         TVK =  TVK.to.use,
-        order = order.out$TAXON_NAME,
-        family = family.out$TAXON_NAME,
-        genus = genus.out$TAXON_NAME,
         recommended_species = la.output.df$taxon_name,
-        authority = sort_order$TAXON_AUTHORITY,
-        vernacular = en.output.df$vernacular,
-        SORT_ORDER = sort_order$SORT_ORDER
+        authority = la.names.out$TAXON_AUTHORITY,
+        vernacular = en.names.out$TAXON_NAME
 
-      )
+      ) %>% head(n=1)
+
+      All.names.out <- cbind(All.names.out, taxonomy.ladder )
 
     }
 
