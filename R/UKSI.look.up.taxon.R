@@ -121,14 +121,23 @@ UKSI.look.up.taxon <- function(taxon) {
       #   vernacular =  en.names.out$TAXON_NAME,
       #   NAME_FORM_en = en.names.out$NAME_FORM,
       #   name_level_en = en.names.out$levels) %>% arrange(name_level_en) %>% head(n = 1)
+
       en.output.tibble     <-  tibble::tibble(
-                        vernacular =  en.names.out$TAXON_NAME,
-                         NAME_FORM_en = en.names.out$NAME_FORM,
-                        name_level_en = en.names.out$levels)
+        vernacular =  " ",
+        NAME_FORM_en = " ",
+        name_level_en = " ")
 
-      en.output.arranged <-  arrange(en.output.tibble, "name_level_en") %>% head(n = 1)
+      if(nrow(en.names.out) > 0){
+        en.output.tibble     <-  tibble::tibble(
+          vernacular =  en.names.out$TAXON_NAME,
+          NAME_FORM_en = en.names.out$NAME_FORM,
+          name_level_en = en.names.out$levels)
 
-      en.output.df <- head(en.output.arranged, n=1)
+        en.output.arranged <-  arrange(en.output.tibble, "name_level_en") %>% head(n = 1)
+
+        en.output.df <- head(en.output.arranged, n=1)
+      }
+
 
       # Walk up the taxonomy
 
@@ -145,7 +154,7 @@ UKSI.look.up.taxon <- function(taxon) {
         TVK =  TVK.to.use,
         recommended_species = la.output.df$taxon_name,
         authority = TAXON_AUTHORITY_clean,
-        vernacular = en.names.out$TAXON_NAME
+        vernacular = en.output.tibble$vernacular
 
       ) %>% head(n=1)
 
