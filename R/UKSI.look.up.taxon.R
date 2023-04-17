@@ -135,7 +135,7 @@ UKSI.look.up.taxon <- function(taxon) {
 
       if(nrow(en.names.out) > 0){
         en.output.tibble     <-  tibble::tibble(
-          vernacular =  en.names.out$RECOMMENDED_SCIENTIFIC_NAME,
+          vernacular =  en.names.out$TAXON_NAME,
           NAME_FORM_en = en.names.out$NAME_FORM,
           name_level_en = en.names.out$levels)
 
