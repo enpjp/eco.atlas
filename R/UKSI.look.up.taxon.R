@@ -63,6 +63,9 @@ UKSI.look.up.taxon <- function(taxon) {
      cols.to.use <- c(
                       "NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME",
                       "TAXON_NAME",
+                      "RECOMMENDED_SCIENTIFIC_NAME",
+                      "NAME_STATUS",
+                      "NAME_TYPE",
                       "NAME_FORM",
                       "LANGUAGE")
 
@@ -72,7 +75,7 @@ UKSI.look.up.taxon <- function(taxon) {
      en.names.out <- en.names.out.tvk[en.names.out.tvk$LANGUAGE == "en", ]
 
 
-
+     en.names.out <- en.names.out.tvk[en.names.out.tvk$NAME_STATUS == "R", ]
       en.names.out$NAME_FORM <- factor( en.names.out$NAME_FORM, c("W", "I", "R","S")  )
       en.names.out$levels <- as.numeric(en.names.out$NAME_FORM)
       en.names.out <- en.names.out %>% arrange(levels) %>% head(n=1)
@@ -85,7 +88,10 @@ UKSI.look.up.taxon <- function(taxon) {
 
       cols.to.use <- c("NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME",
                        "TAXON_NAME",
-                       "TAXON_AUTHORITY",
+                       "RECOMMENDED_SCIENTIFIC_NAME",
+                       "RECOMMENDED_NAME_AUTHORITY",
+                       "NAME_STATUS",
+                       "NAME_TYPE",
                        "NAME_FORM",
                        "LANGUAGE"
       )
@@ -96,7 +102,7 @@ UKSI.look.up.taxon <- function(taxon) {
       la.names.out <- NAMES.select.tvk[NAMES.select.tvk$LANGUAGE == "la", ]
 
 
-
+      la.names.out <- NAMES.select.tvk[NAMES.select.tvk$NAME_STATUS == "R", ]
       la.names.out$NAME_FORM <- factor( la.names.out$NAME_FORM, c("W", "I", "R","S")  )
       la.names.out$levels <- as.numeric(la.names.out$NAME_FORM)
  #     la.names.out <- la.names.out %>% arrange(levels)
@@ -108,8 +114,8 @@ UKSI.look.up.taxon <- function(taxon) {
       #                        name_level_la = la.names.out$levels) %>% arrange(name_level_la) %>% head(n = 1)
       #
       la.output.tibble <-  tibble::tibble(TVK =  TVK.to.use,
-                                          taxon_name =  la.names.out$TAXON_NAME,
-                                          taxon_authority = la.names.out$TAXON_AUTHORITY,
+                                          taxon_name =  la.names.out$RECOMMENDED_SCIENTIFIC_NAME,
+                                          taxon_authority = la.names.out$RECOMMENDED_NAME_AUTHORITY,
                                           NAME_FORM_la = la.names.out$NAME_FORM,
                                           name_level_la = la.names.out$levels)
       la.output.arranged <- arrange(la.output.tibble, "name_level_la")
@@ -129,7 +135,7 @@ UKSI.look.up.taxon <- function(taxon) {
 
       if(nrow(en.names.out) > 0){
         en.output.tibble     <-  tibble::tibble(
-          vernacular =  en.names.out$TAXON_NAME,
+          vernacular =  en.names.out$RECOMMENDED_SCIENTIFIC_NAME,
           NAME_FORM_en = en.names.out$NAME_FORM,
           name_level_en = en.names.out$levels)
 
@@ -147,7 +153,7 @@ UKSI.look.up.taxon <- function(taxon) {
       taxonomy.ladder <- taxonomy.cols[, !names(taxonomy.cols) == "Species"]
 
       # Construct a tibble for output
-      TAXON_AUTHORITY_clean  <-   brackets(la.names.out$TAXON_AUTHORITY)
+      TAXON_AUTHORITY_clean  <-   brackets(la.names.out$RECOMMENDED_NAME_AUTHORITY)
 
       All.names.out <- tibble::tibble(
         requested.taxon = taxon,
