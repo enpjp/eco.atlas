@@ -20,7 +20,7 @@ taxonomy.parent <- function(taxon_key) {
 
  out.sort <- data.frame (SORT_ORDER = parent.out$SORT_ORDER )
 
- out.cols <- cbind(out.sort, out.cols)
+ #out.cols <- cbind( out.cols, out.sort)
 
 # Now add a while loop to climb all the way up the taxonomy tree.
  # Add a counter to stop after 20 steps anyway.
@@ -37,6 +37,6 @@ taxonomy.parent <- function(taxon_key) {
    out.cols <- cbind(out.cols, out.cols.recursive)
  }
 
-
+ out.cols <- cbind( out.cols, out.sort)
   return(out.cols)
 }
