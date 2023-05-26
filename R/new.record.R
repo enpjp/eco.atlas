@@ -128,4 +128,18 @@ new.record <- function(
    }
 
 
+   # Now copy any resource files
+   resource.path <- dirname(data.model.path)
+   resource.dir <- fs::path(resource.path, "resources")
+   destination.path <- fs::path(my.working.directory,
+                                index.reference,
+                                "resources")
+   if (dir.exists(resource.dir)) {
+     fs::dir_create(destination.path, recurse = TRUE)
+     fs::dir_copy(resource.dir,
+                  destination.path, overwrite = TRUE)
+   }
+
+
+
 }
