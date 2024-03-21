@@ -31,7 +31,8 @@ Imports:
     janitor,
     dplyr,
     tibble,
-    utils
-RoxygenNote: 7.2.3
+    utils,
+    sf
+RoxygenNote: 7.3.1
 Depends: 
     R (>= 2.10)
