@@ -14,6 +14,9 @@ text with brackets
 }
 \description{
 Returns a consistent layout for authority without changing base data.
+Deprecated:
+Now does not change anything as the
+position of the brackets encode species status.
 }
 \examples{
 
