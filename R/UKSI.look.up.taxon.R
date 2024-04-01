@@ -105,7 +105,7 @@ UKSI.look.up.taxon <- function(taxon) {
       la.names.out <- NAMES.select.tvk[NAMES.select.tvk$NAME_STATUS == "R", ]
       la.names.out$NAME_FORM <- factor( la.names.out$NAME_FORM, c("W", "I", "R","S")  )
       la.names.out$levels <- as.numeric(la.names.out$NAME_FORM)
- #     la.names.out <- la.names.out %>% arrange(levels)
+      la.names.out <- la.names.out %>% arrange(levels) %>% head(1)
 
       # Latin Name
       # la.output.df <- tibble::tibble(TVK =  TVK.to.use,
