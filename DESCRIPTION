@@ -32,7 +32,10 @@ Imports:
     dplyr,
     tibble,
     utils,
-    sf
+    sf,
+    clipr,
+    knitr,
+    tidyr
 RoxygenNote: 7.3.1
 Depends: 
     R (>= 2.10)
