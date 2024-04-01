@@ -1,5 +1,5 @@
 
-taxonomy.parent <- function(taxon_key) {
+taxonomy.parent <- function(taxon) {
 
  # NAMES <- UKSI.names
   TAXA <- UKSI.taxa
@@ -13,7 +13,9 @@ taxonomy.parent <- function(taxon_key) {
 
   UKSI.taxa.cols <- TAXA[,cols.to.use]
   parent.out <- UKSI.taxa.cols[
-    UKSI.taxa.cols$TAXON_VERSION_KEY == taxon_key,] %>% head(n = 1)
+    UKSI.taxa.cols$TAXON_NAME == taxon,] %>%
+    arrange(desc("ORGANISM_KEY")) %>%
+    head(n = 1)
 
   out.cols <- data.frame (parent.out$TAXON_NAME )
  colnames(out.cols) <- parent.out$RANK

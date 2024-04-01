@@ -10,6 +10,7 @@
 #'@importFrom dplyr "select"
 #'@importFrom dplyr "filter"
 #'@importFrom dplyr "arrange"
+#'@importFrom dplyr "desc"
 #'@importFrom utils "head"
 #'
 UKSI.look.up.taxon <- function(taxon) {
@@ -148,7 +149,7 @@ UKSI.look.up.taxon <- function(taxon) {
 
       # Walk up the taxonomy
 
-      taxonomy.cols <-    taxonomy.parent(TVK.to.use)
+      taxonomy.cols <-    taxonomy.parent(la.output.df$taxon_name)
       # drop the Species name if it is there as we already have it
 
       taxonomy.ladder <- taxonomy.cols[, !names(taxonomy.cols) == "Species"]

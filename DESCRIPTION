@@ -1,6 +1,6 @@
 Package: eco.atlas
 Title: Useful Functions For Biodiversity Analysis
-Version: 0.0.1.0000
+Version: 0.0.2.0000
 Authors@R: 
     person(given = "Paul",
            family = "Palmer",
