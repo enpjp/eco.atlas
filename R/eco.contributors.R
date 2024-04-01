@@ -14,25 +14,26 @@ eco.contributors <- function(my.data.ss) {
 
   thanks.stack$values <- gsub("NULL",NA,thanks.stack$values)
 
-   thanks.expanded <- thanks.stack %>% tidyr::separate_longer_delim("values", sep = "&|;|,")
+  thanks.expanded <- thanks.stack %>% tidyr::separate_longer_delim( cols = "values",
+                                                                    delim = stringr::regex("&|;|,"))
 
-   thanks.expanded$values <- thanks.expanded$values %>% stringr::str_trim()
+  thanks.expanded$values <- thanks.expanded$values %>% stringr::str_trim()
 
   thanks <-  thanks.expanded %>% unique()  %>% tidyr::drop_na()
 
-  thanks.recorders <- thanks %>% filter("ind" == "recorder.name")
-  thanks.determiners <- thanks %>% filter("ind" == "determiner")
+  thanks.recorders <- thanks %>% filter(thanks$ind == "recorder.name")
+  thanks.determiners <- thanks %>% filter(thanks$ind == "determiner")
 
   # Now make a thanks string
   recorder.text <- knitr::combine_words(thanks.recorders$values)
   determiner.text <-  knitr::combine_words(thanks.determiners$values)
 
   thanks.text <- paste("Thanks to ",recorder.text,
-                             " for providing specimens. The assistance with determinations by ",
-                             determiner.text,
-                             " is gratefully acknowledged.",
+                       " for providing specimens. The assistance with determinations by ",
+                       determiner.text,
+                       " is gratefully acknowledged.",
                        sep = ""
-                        )
+  )
   clipr::write_clip(thanks.text)
 
   return(thanks)
