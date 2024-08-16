@@ -5,10 +5,11 @@
 #' @param lattitude as it says
 #' @param longitude as it says
 #'
-#' @return GBNG
+#' @return GBNG value
 #' @export lat_long_to_GBNG
 #'
-#' @examples
+#' @examples  lat_long_to_GBNG(52.665137, -0.6906808)
+#'
 lat_long_to_GBNG <- function(lattitude, longitude){
 
   coords <- NULL
@@ -29,6 +30,8 @@ lat_long_to_GBNG <- function(lattitude, longitude){
   sp.coords.sf.ng  <-  sf::st_transform(sp.coords.sf, crs = sf::st_crs(27700))
 
   GBNG.out <- eco.atlas::sf_to_UKNGR_Letter(sp.coords.sf.ng)
+
+  return(GBNG.out)
 
 }
 

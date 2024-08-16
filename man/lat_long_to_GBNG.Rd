@@ -12,8 +12,12 @@ lat_long_to_GBNG(lattitude, longitude)
 \item{longitude}{as it says}
 }
 \value{
-GBNG
+GBNG value
 }
 \description{
 Lattitude Longitude To UKNG
+}
+\examples{
+ lat_long_to_GBNG(52.665137, -0.6906808)
+
 }
