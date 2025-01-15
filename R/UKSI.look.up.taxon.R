@@ -128,7 +128,7 @@ UKSI.look.up.taxon <- function(taxon) {
       #   vernacular =  en.names.out$TAXON_NAME,
       #   NAME_FORM_en = en.names.out$NAME_FORM,
       #   name_level_en = en.names.out$levels) %>% arrange(name_level_en) %>% head(n = 1)
-
+#  UKSI.names %>% select( all_of(cols.to.use) ) %>% filter( TAXON_NAME == "Acleris schalleriana", NAME_STATUS == "R", NAME_FORM == "W")
       en.output.tibble     <-  tibble::tibble(
         vernacular =  " ",
         NAME_FORM_en = " ",
@@ -180,8 +180,10 @@ UKSI.look.up.taxon <- function(taxon) {
 
   )
 
+# Nake sure that there are no ampersands
+  data.cleaned <- data.frame(lapply(All.names.out, function(x) {
+    gsub("&", "and", x)
+  }))
 
-
-
-  return( All.names.out)
+  return( data.cleaned)
 }
