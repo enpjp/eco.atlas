@@ -43,11 +43,16 @@ UKSI.look.up.taxon <- function(taxon) {
       #                             NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME)
       cols.to.use <- c("NBN_TAXON_VERSION_KEY",
                        "TAXON_NAME",
-                       "NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME")
+                       "NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME",
+                       "NAME_STATUS",
+                       "NAME_TYPE",
+                       "NAME_FORM")
 
       NAMES.cols <- NAMES[,cols.to.use]
 
       TVK.out <- NAMES.cols[NAMES.cols$TAXON_NAME == taxon,   ]
+ # Try filter
+      TVK.out <- filter(TVK.out,  NAME_STATUS == "R", NAME_FORM == "W")
 
 
      # %>% filter(TAXON_NAME   %in% taxon )
@@ -75,11 +80,13 @@ UKSI.look.up.taxon <- function(taxon) {
      en.names.out.tvk <- NAMES.cols[NAMES.cols$NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME == TVK.to.use, ]
      en.names.out <- en.names.out.tvk[en.names.out.tvk$LANGUAGE == "en", ]
 
+     en.names.out <-  filter(en.names.out, NAME_STATUS == "R",NAME_FORM == "W")
 
-     en.names.out <- en.names.out[en.names.out$NAME_STATUS == "R", ]
-      en.names.out$NAME_FORM <- factor( en.names.out$NAME_FORM, c("W", "I", "R","S")  )
-      en.names.out$levels <- as.numeric(en.names.out$NAME_FORM)
-      en.names.out <- en.names.out %>% arrange(levels) %>% head(n=1)
+
+     # en.names.out <- en.names.out[en.names.out$NAME_STATUS == "R", ]
+     #  en.names.out$NAME_FORM <- factor( en.names.out$NAME_FORM, c("W", "I", "R","S")  )
+     #  en.names.out$levels <- as.numeric(en.names.out$NAME_FORM)
+     #  en.names.out <- en.names.out %>% arrange(levels) %>% head(n=1)
 
 
  #     la.names.out <- NAMES %>% select(NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME,TAXON_NAME,NAME_FORM, LANGUAGE) %>%
@@ -102,11 +109,13 @@ UKSI.look.up.taxon <- function(taxon) {
       NAMES.select.tvk <- NAMES.cols[NAMES.cols$NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME == TVK.to.use, ]
       la.names.out <- NAMES.select.tvk[NAMES.select.tvk$LANGUAGE == "la", ]
 
+      la.names.out <- filter( la.names.out, NAME_STATUS == "R", NAME_FORM == "W")
 
-      la.names.out <- NAMES.select.tvk[NAMES.select.tvk$NAME_STATUS == "R", ]
-      la.names.out$NAME_FORM <- factor( la.names.out$NAME_FORM, c("W", "I", "R","S")  )
-      la.names.out$levels <- as.numeric(la.names.out$NAME_FORM)
-      la.names.out <- la.names.out %>% arrange(levels) %>% head(1)
+#
+#       la.names.out <- NAMES.select.tvk[NAMES.select.tvk$NAME_STATUS == "R", ]
+#       la.names.out$NAME_FORM <- factor( la.names.out$NAME_FORM, c("W", "I", "R","S")  )
+#       la.names.out$levels <- as.numeric(la.names.out$NAME_FORM)
+#       la.names.out <- la.names.out %>% arrange(levels) %>% head(1)
 
       # Latin Name
       # la.output.df <- tibble::tibble(TVK =  TVK.to.use,
@@ -117,10 +126,11 @@ UKSI.look.up.taxon <- function(taxon) {
       la.output.tibble <-  tibble::tibble(TVK =  TVK.to.use,
                                           taxon_name =  la.names.out$RECOMMENDED_SCIENTIFIC_NAME,
                                           taxon_authority = la.names.out$RECOMMENDED_NAME_AUTHORITY,
-                                          NAME_FORM_la = la.names.out$NAME_FORM,
-                                          name_level_la = la.names.out$levels)
-      la.output.arranged <- arrange(la.output.tibble, "name_level_la")
-      la.output.df <- head(la.output.arranged, n=1)
+                                          NAME_FORM_la = la.names.out$NAME_FORM)
+                                          #name_level_la = la.names.out$levels)
+      # la.output.arranged <- arrange(la.output.tibble, "name_level_la")
+      # la.output.df <- head(la.output.arranged, n=1)
+      la.output.df <- la.output.tibble
 
 
       # Vernacular Name
@@ -131,19 +141,19 @@ UKSI.look.up.taxon <- function(taxon) {
 #  UKSI.names %>% select( all_of(cols.to.use) ) %>% filter( TAXON_NAME == "Acleris schalleriana", NAME_STATUS == "R", NAME_FORM == "W")
       en.output.tibble     <-  tibble::tibble(
         vernacular =  " ",
-        NAME_FORM_en = " ",
-        name_level_en = " ")
+        NAME_FORM_en = " ")
+       # name_level_en = " ")
 
-      if(nrow(en.names.out) > 0){
-        en.output.tibble     <-  tibble::tibble(
-          vernacular =  en.names.out$TAXON_NAME,
-          NAME_FORM_en = en.names.out$NAME_FORM,
-          name_level_en = en.names.out$levels)
-
-        en.output.arranged <-  arrange(en.output.tibble, "name_level_en") %>% head(n = 1)
-
-        en.output.tibble <- head(en.output.arranged, n=1)
-      }
+      # if(nrow(en.names.out) > 0){
+      #   en.output.tibble     <-  tibble::tibble(
+      #     vernacular =  en.names.out$TAXON_NAME,
+      #     NAME_FORM_en = en.names.out$NAME_FORM,
+      #     name_level_en = en.names.out$levels)
+      #
+      #   en.output.arranged <-  arrange(en.output.tibble, "name_level_en") %>% head(n = 1)
+      #
+      #   en.output.tibble <- head(en.output.arranged, n=1)
+      # }
 
 
 
