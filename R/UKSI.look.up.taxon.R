@@ -43,11 +43,19 @@ UKSI.look.up.taxon <- function(taxon) {
       #                             NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME)
       cols.to.use <- c("NBN_TAXON_VERSION_KEY",
                        "TAXON_NAME",
-                       "NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME")
+                       "NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME",
+                       "NAME_STATUS",
+                       "NAME_FORM")
 
       NAMES.cols <- NAMES[,cols.to.use]
 
       TVK.out <- NAMES.cols[NAMES.cols$TAXON_NAME == taxon,   ]
+
+      # Select recommended well formed names
+
+      TVK.out <- TVK.out[TVK.out$NAME_STATUS == "R", ]
+      TVK.out <- TVK.out[TVK.out$NAME_FORM == "W", ]
+
 
 
      # %>% filter(TAXON_NAME   %in% taxon )
@@ -178,7 +186,9 @@ UKSI.look.up.taxon <- function(taxon) {
 
     }
 
-  )
+  )   # End try
+
+
 
 # Nake sure that there are no ampersands
   data.cleaned <- data.frame(lapply(All.names.out, function(x) {
