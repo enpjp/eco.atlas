@@ -22,9 +22,9 @@ UKSI.look.up.taxon <- function(taxon) {
   All.names.out <- tibble::tibble(
     requested.taxon = taxon,
     TVK = "unknown",
-    order = "unknown",
-    family = "unknown",
-    genus = "unknown",
+    Order = "unknown",
+    Family = "unknown",
+    Genus = "unknown",
     recommended_species = "unknown",
     authority = "unknown",
     vernacular = "unknown",
