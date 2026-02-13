@@ -38,12 +38,12 @@ UKSI.look.up.taxon <- function(taxon) {
   try(
     {
      # TVK.out <- TAXA %>% select(TAXON_VERSION_KEY,TAXON_NAME, SORT_ORDER) %>% filter(TAXON_NAME %in% taxon )
-      # TVK.out <- NAMES %>% select(NBN_TAXON_VERSION_KEY,
+      # TVK.out <- NAMES %>% select(TAXON_VERSION_KEY,
       #                             TAXON_NAME,
-      #                             NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME)
-      cols.to.use <- c("NBN_TAXON_VERSION_KEY",
+      #                             RECOMMENDED_TAXON_VERSION_KEY)
+      cols.to.use <- c("TAXON_VERSION_KEY",
                        "TAXON_NAME",
-                       "NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME",
+                       "RECOMMENDED_TAXON_VERSION_KEY",
                        "NAME_STATUS",
                        "NAME_FORM")
 
@@ -60,17 +60,17 @@ UKSI.look.up.taxon <- function(taxon) {
 
      # %>% filter(TAXON_NAME   %in% taxon )
 
-      TVK.to.use <- TVK.out$NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME %>% unique()
+      TVK.to.use <- TVK.out$RECOMMENDED_TAXON_VERSION_KEY %>% unique()
 
 
- #    en.names.out <- NAMES %>% select(NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME,TAXON_NAME,NAME_FORM, LANGUAGE) %>%
- #      filter(NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME %in%  TVK.to.use, LANGUAGE == "en")
+ #    en.names.out <- NAMES %>% select(RECOMMENDED_TAXON_VERSION_KEY,TAXON_NAME,NAME_FORM, LANGUAGE) %>%
+ #      filter(RECOMMENDED_TAXON_VERSION_KEY %in%  TVK.to.use, LANGUAGE == "en")
 
- #    NAMES.select <- select(NAMES, NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME,TAXON_NAME,NAME_FORM, LANGUAGE)
-#     en.names.out <-filter(NAMES.select, NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME %in%  TVK.to.use, LANGUAGE == "en")
+ #    NAMES.select <- select(NAMES, RECOMMENDED_TAXON_VERSION_KEY,TAXON_NAME,NAME_FORM, LANGUAGE)
+#     en.names.out <-filter(NAMES.select, RECOMMENDED_TAXON_VERSION_KEY %in%  TVK.to.use, LANGUAGE == "en")
 
      cols.to.use <- c(
-                      "NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME",
+                      "RECOMMENDED_TAXON_VERSION_KEY",
                       "TAXON_NAME",
                       "RECOMMENDED_SCIENTIFIC_NAME",
                       "NAME_STATUS",
@@ -80,7 +80,7 @@ UKSI.look.up.taxon <- function(taxon) {
 
      NAMES.cols <- NAMES[,cols.to.use]
 
-     en.names.out.tvk <- NAMES.cols[NAMES.cols$NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME == TVK.to.use, ]
+     en.names.out.tvk <- NAMES.cols[NAMES.cols$RECOMMENDED_TAXON_VERSION_KEY == TVK.to.use, ]
      en.names.out <- en.names.out.tvk[en.names.out.tvk$LANGUAGE == "en", ]
 
 
@@ -90,12 +90,12 @@ UKSI.look.up.taxon <- function(taxon) {
       en.names.out <- en.names.out %>% arrange(levels) %>% head(n=1)
 
 
- #     la.names.out <- NAMES %>% select(NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME,TAXON_NAME,NAME_FORM, LANGUAGE) %>%
-  #      filter(NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME %in%  TVK.to.use, LANGUAGE == "la")
-   #   NAMES.select <-  select(NAMES, NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME,TAXON_NAME,NAME_FORM, LANGUAGE)
-  #    la.names.out <- filter(NAMES.select ,NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME %in%  TVK.to.use, LANGUAGE == "la")
+ #     la.names.out <- NAMES %>% select(RECOMMENDED_TAXON_VERSION_KEY,TAXON_NAME,NAME_FORM, LANGUAGE) %>%
+  #      filter(RECOMMENDED_TAXON_VERSION_KEY %in%  TVK.to.use, LANGUAGE == "la")
+   #   NAMES.select <-  select(NAMES, RECOMMENDED_TAXON_VERSION_KEY,TAXON_NAME,NAME_FORM, LANGUAGE)
+  #    la.names.out <- filter(NAMES.select ,RECOMMENDED_TAXON_VERSION_KEY %in%  TVK.to.use, LANGUAGE == "la")
 
-      cols.to.use <- c("NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME",
+      cols.to.use <- c("RECOMMENDED_TAXON_VERSION_KEY",
                        "TAXON_NAME",
                        "RECOMMENDED_SCIENTIFIC_NAME",
                        "RECOMMENDED_NAME_AUTHORITY",
@@ -107,7 +107,7 @@ UKSI.look.up.taxon <- function(taxon) {
 
       NAMES.cols <- NAMES[,cols.to.use]
 
-      NAMES.select.tvk <- NAMES.cols[NAMES.cols$NBN_TAXON_VERSION_KEY_FOR_RECOMMENDED_NAME == TVK.to.use, ]
+      NAMES.select.tvk <- NAMES.cols[NAMES.cols$RECOMMENDED_TAXON_VERSION_KEY == TVK.to.use, ]
       la.names.out <- NAMES.select.tvk[NAMES.select.tvk$LANGUAGE == "la", ]
 
 
