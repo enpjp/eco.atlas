@@ -21,6 +21,7 @@ UKSI.look.up.taxon <- function(taxon) {
   # which.rows <- which(UKSI$TAXON_NAME == taxon)
   All.names.out <- tibble::tibble(
     requested.taxon = taxon,
+    informalGroup = "unknown",
     TVK = "unknown",
     Order = "unknown",
     Family = "unknown",
@@ -177,9 +178,16 @@ UKSI.look.up.taxon <- function(taxon) {
 
       }
 
+      if("informalGroup" %in% colnames(en.output.tibble)){
+
+        informal.Group <- en.output.tibble$informalGroup
+      }else{
+        informal.Group <- "Not assigned"
+      }
+
       All.names.out <- tibble::tibble(
         requested.taxon = taxon,
-        informalGroup = en.output.tibble$informalGroup,
+        informalGroup = informal.Group,
         TVK =  TVK.to.use,
         recommended_species = la.output.df$taxon_name,
         authority = TAXON_AUTHORITY_clean,
