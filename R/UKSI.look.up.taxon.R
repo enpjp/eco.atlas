@@ -45,7 +45,9 @@ UKSI.look.up.taxon <- function(taxon) {
                        "TAXON_NAME",
                        "RECOMMENDED_TAXON_VERSION_KEY",
                        "NAME_STATUS",
-                       "NAME_FORM")
+                       "NAME_FORM",
+                       "INFORMAL_GROUP")
+
 
       NAMES.cols <- NAMES[,cols.to.use]
 
@@ -69,7 +71,7 @@ UKSI.look.up.taxon <- function(taxon) {
  #    NAMES.select <- select(NAMES, RECOMMENDED_TAXON_VERSION_KEY,TAXON_NAME,NAME_FORM, LANGUAGE)
 #     en.names.out <-filter(NAMES.select, RECOMMENDED_TAXON_VERSION_KEY %in%  TVK.to.use, LANGUAGE == "en")
 
-     cols.to.use <- c(
+     cols.to.use <- c("INFORMAL_GROUP",
                       "RECOMMENDED_TAXON_VERSION_KEY",
                       "TAXON_NAME",
                       "RECOMMENDED_SCIENTIFIC_NAME",
@@ -95,7 +97,8 @@ UKSI.look.up.taxon <- function(taxon) {
    #   NAMES.select <-  select(NAMES, RECOMMENDED_TAXON_VERSION_KEY,TAXON_NAME,NAME_FORM, LANGUAGE)
   #    la.names.out <- filter(NAMES.select ,RECOMMENDED_TAXON_VERSION_KEY %in%  TVK.to.use, LANGUAGE == "la")
 
-      cols.to.use <- c("RECOMMENDED_TAXON_VERSION_KEY",
+      cols.to.use <- c("INFORMAL_GROUP",
+                        "RECOMMENDED_TAXON_VERSION_KEY",
                        "TAXON_NAME",
                        "RECOMMENDED_SCIENTIFIC_NAME",
                        "RECOMMENDED_NAME_AUTHORITY",
@@ -144,6 +147,7 @@ UKSI.look.up.taxon <- function(taxon) {
 
       if(nrow(en.names.out) > 0){
         en.output.tibble     <-  tibble::tibble(
+          informalGroup = en.names.out$INFORMAL_GROUP,
           vernacular =  en.names.out$TAXON_NAME,
           NAME_FORM_en = en.names.out$NAME_FORM,
           name_level_en = en.names.out$levels)
@@ -175,10 +179,12 @@ UKSI.look.up.taxon <- function(taxon) {
 
       All.names.out <- tibble::tibble(
         requested.taxon = taxon,
+        informalGroup = en.output.tibble$informalGroup,
         TVK =  TVK.to.use,
         recommended_species = la.output.df$taxon_name,
         authority = TAXON_AUTHORITY_clean,
         vernacular = vernacular.to.use
+
 
       ) %>% head(n=1)
 
