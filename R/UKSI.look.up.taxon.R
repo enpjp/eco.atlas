@@ -56,8 +56,8 @@ UKSI.look.up.taxon <- function(taxon) {
 
       # Select recommended well formed names
 
-      TVK.out <- TVK.out[TVK.out$NAME_STATUS == "R", ]
-      TVK.out <- TVK.out[TVK.out$NAME_FORM == "W", ]
+   #   TVK.out <- TVK.out[TVK.out$NAME_STATUS == "R", ]
+    #  TVK.out <- TVK.out[TVK.out$NAME_FORM == "W", ]
 
 
 
