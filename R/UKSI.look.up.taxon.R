@@ -67,7 +67,7 @@ UKSI.look.up.taxon <- function(taxon) {
 
                   TVK.to.use <- TVK.out$RECOMMENDED_TAXON_VERSION_KEY %>%
                     unique() %>% stringr::str_sort(numeric = TRUE,
-                                                   decreasing = FALSE) %>%
+                                                   decreasing = TRUE) %>%
                     head(1)
 
 
